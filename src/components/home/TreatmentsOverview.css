@@ -1,0 +1,195 @@
+.treatments-section {
+    background: var(--color-white);
+    position: relative;
+}
+
+.section-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto var(--space-12);
+}
+
+.section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    border-radius: var(--radius-full);
+    margin-bottom: var(--space-3);
+}
+
+/* Tab Navigation */
+.treatment-tabs {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-10);
+    background: var(--color-primary-dark);
+    padding: var(--space-2);
+    border-radius: var(--radius-full);
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tab-btn {
+    padding: var(--space-3) var(--space-8);
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    color: var(--color-text-secondary);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.tab-btn:hover {
+    color: var(--color-text-primary);
+}
+
+.tab-btn.active {
+    background: var(--color-white);
+    color: var(--color-text-primary);
+    box-shadow: var(--shadow-md);
+}
+
+/* Treatment Grid */
+.treatments-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+}
+
+/* Treatment Card */
+.treatment-card {
+    text-decoration: none;
+    overflow: hidden;
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.treatment-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.treatment-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+.treatment-card:hover .treatment-image img {
+    transform: scale(1.08);
+}
+
+.treatment-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.6) 100%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: var(--space-4);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.treatment-card:hover .treatment-overlay {
+    opacity: 1;
+}
+
+.know-more {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-white);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+}
+
+.treatment-content {
+    padding: var(--space-5);
+}
+
+.treatment-content h3 {
+    font-size: var(--text-lg);
+    font-family: var(--font-heading);
+    font-weight: var(--font-semibold);
+    margin-bottom: var(--space-2);
+    transition: color var(--transition-fast);
+}
+
+.treatment-card:hover .treatment-content h3 {
+    color: var(--color-accent);
+}
+
+.treatment-content p {
+    font-size: var(--text-sm);
+    color: var(--color-text-light);
+    line-height: var(--leading-normal);
+    margin-bottom: var(--space-4);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.treatment-meta {
+    display: flex;
+    gap: var(--space-4);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--color-primary-dark);
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-xs);
+    color: var(--color-text-light);
+}
+
+.meta-item svg {
+    color: var(--color-accent);
+}
+
+/* CTA */
+.treatments-cta {
+    text-align: center;
+    margin-top: var(--space-10);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .treatments-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .treatment-tabs {
+        flex-direction: column;
+        width: 100%;
+        max-width: 280px;
+        border-radius: var(--radius-xl);
+    }
+
+    .tab-btn {
+        width: 100%;
+        border-radius: var(--radius-lg);
+    }
+
+    .treatments-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+}
