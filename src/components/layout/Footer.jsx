@@ -63,7 +63,8 @@ const Footer = () => {
                         {/* Brand Column */}
                         <div className="footer-brand">
                             <Link to="/" className="footer-logo">
-                                <img src="/logo-full.png" alt="Niraa Aesthetics" className="logo-full" />
+                                <span className="logo-text">Niraa</span>
+                                <span className="logo-accent">Aesthetics</span>
                             </Link>
                             <p className="brand-description">
                                 Expert-led dermatology clinic offering premium skin and hair care treatments

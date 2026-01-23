@@ -38,16 +38,12 @@
     letter-spacing: -0.02em;
 }
 
-.logo-full {
-    height: 64px;
-    width: auto;
-    object-fit: contain;
-    /* Optional: mix-blend-mode if needed */
+.logo-text {
+    color: var(--color-text-primary);
 }
 
-.header-logo:hover .logo-full {
-    transform: scale(1.02);
-    transition: transform var(--transition-base);
+.logo-accent {
+    color: var(--color-accent);
 }
 
 /* Navigation */

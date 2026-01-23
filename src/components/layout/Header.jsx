@@ -55,7 +55,8 @@ const Header = () => {
             <div className="header-container">
                 {/* Logo */}
                 <Link to="/" className="header-logo">
-                    <img src="/logo-full.png" alt="Niraa Aesthetics" className="logo-full" />
+                    <span className="logo-text">Niraa</span>
+                    <span className="logo-accent">Aesthetics</span>
                 </Link>
 
                 {/* Desktop Navigation */}
