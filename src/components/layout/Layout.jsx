@@ -7,7 +7,7 @@ const Layout = () => {
     return (
         <>
             <Header />
-            <main style={{ flex: 1, paddingTop: '80px' }}>
+            <main style={{ flex: 1 }}>
                 <Outlet />
             </main>
             <Footer />

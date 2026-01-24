@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { BlogProvider } from './context/BlogContext';
 import Layout from './components/layout/Layout';
+import ScrollToTop from './components/common/ScrollToTop';
 
 // Pages
 import Home from './pages/Home';
@@ -22,6 +23,7 @@ function App() {
   return (
     <BlogProvider>
       <Router>
+        <ScrollToTop />
         <Routes>
           {/* Admin Routes (without header/footer) */}
           <Route path="/admin" element={<AdminLogin />} />

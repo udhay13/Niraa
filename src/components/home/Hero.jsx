@@ -1,113 +1,167 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles, Play } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight, Sparkles, Phone } from 'lucide-react';
 import './Hero.css';
 
+// Hero slider data - 4 templates
+const heroSlides = [
+    {
+        id: 1,
+        title: 'Flaunt Your Glow',
+        subtitle: 'Complete Skin Transformation',
+        highlight: 'Premium Facial Package',
+        description: 'Experience our signature facial treatments for radiant, youthful skin',
+        image: 'https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=1920&q=80',
+        treatments: ['HydraFacial', 'Chemical Peel', 'LED Therapy'],
+        cta: 'Book Now',
+        link: '/skin-treatments'
+    },
+    {
+        id: 2,
+        title: 'Age-Defying Beauty',
+        subtitle: 'Turn Back Time',
+        highlight: 'Anti-Aging Solutions',
+        description: 'Advanced treatments to reduce fine lines and restore youthful radiance',
+        image: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1920&q=80',
+        treatments: ['Botox', 'Dermal Fillers', 'Skin Tightening'],
+        cta: 'Explore Treatments',
+        link: '/skin-treatments'
+    },
+    {
+        id: 3,
+        title: 'Laser Precision',
+        subtitle: 'Advanced Technology',
+        highlight: 'Laser Treatments',
+        description: 'State-of-the-art laser technology for flawless, even-toned skin',
+        image: 'https://images.unsplash.com/photo-1519415510236-718bdfcd89c8?w=1920&q=80',
+        treatments: ['Hair Removal', 'Pigmentation', 'Skin Resurfacing'],
+        cta: 'Learn More',
+        link: '/technology'
+    },
+    {
+        id: 4,
+        title: 'Healthy Hair',
+        subtitle: 'Restore & Regrow',
+        highlight: 'Hair Restoration',
+        description: 'Expert solutions for hair fall, thinning, and scalp health',
+        image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1920&q=80',
+        treatments: ['PRP Therapy', 'Hair Fall Control', 'Scalp Treatment'],
+        cta: 'Get Started',
+        link: '/hair-treatments'
+    }
+];
+
 const Hero = () => {
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+    // Auto-scroll effect
+    useEffect(() => {
+        if (!isAutoPlaying) return;
+
+        const interval = setInterval(() => {
+            setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+        }, 5000); // Change slide every 5 seconds
+
+        return () => clearInterval(interval);
+    }, [isAutoPlaying]);
+
+    const goToSlide = (index) => {
+        setCurrentSlide(index);
+        setIsAutoPlaying(false);
+        // Resume auto-play after 10 seconds
+        setTimeout(() => setIsAutoPlaying(true), 10000);
+    };
+
+    const nextSlide = () => {
+        setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+        setIsAutoPlaying(false);
+        setTimeout(() => setIsAutoPlaying(true), 10000);
+    };
+
+    const prevSlide = () => {
+        setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+        setIsAutoPlaying(false);
+        setTimeout(() => setIsAutoPlaying(true), 10000);
+    };
+
     const handleWhatsApp = () => {
         const message = encodeURIComponent('Hello! I would like to book a consultation at Niraa Aesthetics.');
         window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
     };
 
     return (
-        <section className="hero">
-            {/* Animated Background */}
-            <div className="hero-bg">
-                <div className="hero-gradient"></div>
-                <div className="hero-grid"></div>
-                <div className="hero-orb hero-orb-1"></div>
-                <div className="hero-orb hero-orb-2"></div>
-                <div className="hero-orb hero-orb-3"></div>
+        <section className="hero-carousel">
+            {/* Slides Container */}
+            <div className="slides-container">
+                {heroSlides.map((slide, index) => (
+                    <div
+                        key={slide.id}
+                        className={`hero-slide ${index === currentSlide ? 'active' : ''}`}
+                        style={{ backgroundImage: `url(${slide.image})` }}
+                    >
+                        <div className="slide-overlay"></div>
+
+                        <div className="container slide-content">
+                            <div className="slide-text">
+                                <span className="slide-badge">
+                                    <Sparkles size={14} />
+                                    {slide.highlight}
+                                </span>
+                                <h1 className="slide-title">{slide.title}</h1>
+                                <p className="slide-subtitle">{slide.subtitle}</p>
+                                <p className="slide-description">{slide.description}</p>
+
+                                <div className="slide-cta">
+                                    <button onClick={handleWhatsApp} className="btn btn-primary btn-lg">
+                                        <Phone size={18} />
+                                        Book Consultation
+                                    </button>
+                                    <Link to={slide.link} className="btn btn-outline-light btn-lg">
+                                        {slide.cta}
+                                        <ArrowRight size={18} />
+                                    </Link>
+                                </div>
+                            </div>
+
+                            <div className="slide-treatments">
+                                {slide.treatments.map((treatment, i) => (
+                                    <div key={i} className="treatment-badge" style={{ '--delay': `${i * 0.1}s` }}>
+                                        <span className="treatment-number">{i + 1}</span>
+                                        <span className="treatment-name">{treatment}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                ))}
             </div>
 
-            <div className="container hero-container">
-                <div className="hero-content">
-                    <div className="hero-badge animate-fadeInDown">
-                        <Sparkles size={14} />
-                        <span>Dermatologist-Led Excellence</span>
-                    </div>
-
-                    <h1 className="hero-title animate-fadeInUp">
-                        Transform Your
-                        <span className="hero-title-accent gradient-text"> Skin & Hair</span>
-                        <br />With Expert Care
-                    </h1>
-
-                    <p className="hero-subtitle animate-fadeInUp animate-delay-1">
-                        Experience science-backed dermatology with cutting-edge technology.
-                        Personalized treatments designed for visible, lasting results.
-                    </p>
-
-                    <div className="hero-cta animate-fadeInUp animate-delay-2">
-                        <button onClick={handleWhatsApp} className="btn btn-primary btn-lg">
-                            Book Free Consultation
-                            <ArrowRight size={20} />
-                        </button>
-                        <Link to="/skin-treatments" className="btn btn-secondary btn-lg">
-                            <Play size={18} />
-                            Explore Treatments
-                        </Link>
-                    </div>
-
-                    <div className="hero-trust animate-fadeInUp animate-delay-3">
-                        <div className="trust-avatars">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client" />
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client" />
-                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Client" />
-                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Client" />
-                            <span className="more-count">+10K</span>
-                        </div>
-                        <div className="trust-text">
-                            <div className="trust-rating">
-                                <span className="stars">★★★★★</span>
-                                <span className="rating-score">4.9/5</span>
-                            </div>
-                            <span className="trust-label">Trusted by 10,000+ Happy Clients</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="hero-visual">
-                    <div className="hero-image-wrapper animate-scaleIn">
-                        <div className="hero-image-main">
-                            <img
-                                src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                                alt="Premium skincare treatment"
-                            />
-                            <div className="image-overlay"></div>
-                        </div>
-
-                        {/* Floating Elements */}
-                        <div className="floating-card floating-card-1 animate-float">
-                            <div className="floating-icon">✨</div>
-                            <div className="floating-text">
-                                <span className="floating-value">98%</span>
-                                <span className="floating-label">Success Rate</span>
-                            </div>
-                        </div>
-
-                        <div className="floating-card floating-card-2 animate-float animate-delay-2">
-                            <div className="floating-icon">🏆</div>
-                            <div className="floating-text">
-                                <span className="floating-value">FDA</span>
-                                <span className="floating-label">Approved Tech</span>
-                            </div>
-                        </div>
-
-                        <div className="floating-card floating-card-3 animate-float animate-delay-4">
-                            <div className="floating-icon">⚡</div>
-                            <div className="floating-text">
-                                <span className="floating-value">15+</span>
-                                <span className="floating-label">Treatments</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            {/* Slide Indicators */}
+            <div className="slide-indicators">
+                {heroSlides.map((_, index) => (
+                    <button
+                        key={index}
+                        className={`indicator ${index === currentSlide ? 'active' : ''}`}
+                        onClick={() => goToSlide(index)}
+                        aria-label={`Go to slide ${index + 1}`}
+                    >
+                        <span className="indicator-progress"></span>
+                    </button>
+                ))}
             </div>
 
-            {/* Scroll Indicator */}
-            <div className="hero-scroll animate-bounce">
-                <div className="scroll-line"></div>
-                <span>Scroll</span>
+            {/* Bottom Contact Bar */}
+            <div className="hero-contact-bar">
+                <div className="container contact-bar-content">
+                    <span className="contact-label">Talk to our experts</span>
+                    <a href="tel:+919876543210" className="contact-phone">
+                        <Phone size={16} />
+                        +91 98765 43210
+                    </a>
+                    <span className="contact-divider">|</span>
+                    <span className="contact-trust">⭐ Rated 4.9/5 by 10,000+ clients</span>
+                </div>
             </div>
         </section>
     );

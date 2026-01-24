@@ -14,7 +14,7 @@ const WhatsAppFloat = () => {
             aria-label="Chat on WhatsApp"
         >
             <div className="whatsapp-pulse"></div>
-            <MessageCircle size={28} />
+            <MessageCircle size={22} />
             <span className="whatsapp-tooltip">Chat with us!</span>
         </button>
     );
