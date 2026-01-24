@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ChevronLeft, ChevronRight, Sparkles, Phone } from 'lucide-react';
 import './Hero.css';
@@ -54,6 +54,8 @@ const heroSlides = [
 const Hero = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+    const touchStartX = useRef(0);
+    const touchEndX = useRef(0);
 
     // Auto-scroll effect
     useEffect(() => {
@@ -85,6 +87,30 @@ const Hero = () => {
         setTimeout(() => setIsAutoPlaying(true), 10000);
     };
 
+    // Touch handlers for swipe
+    const handleTouchStart = (e) => {
+        touchStartX.current = e.touches[0].clientX;
+    };
+
+    const handleTouchMove = (e) => {
+        touchEndX.current = e.touches[0].clientX;
+    };
+
+    const handleTouchEnd = () => {
+        const swipeThreshold = 50; // Minimum swipe distance
+        const diff = touchStartX.current - touchEndX.current;
+
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                // Swiped left - go to next slide
+                nextSlide();
+            } else {
+                // Swiped right - go to previous slide
+                prevSlide();
+            }
+        }
+    };
+
     const handleWhatsApp = () => {
         const message = encodeURIComponent('Hello! I would like to book a consultation at Niraa Aesthetics.');
         window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
@@ -93,7 +119,12 @@ const Hero = () => {
     return (
         <section className="hero-carousel">
             {/* Slides Container */}
-            <div className="slides-container">
+            <div
+                className="slides-container"
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+            >
                 {heroSlides.map((slide, index) => (
                     <div
                         key={slide.id}

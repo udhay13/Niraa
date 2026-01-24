@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Home, Sparkles, Phone, Info, Calendar } from 'lucide-react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { Home, Droplet, Sparkles, Info, Calendar } from 'lucide-react';
 import './MobileNav.css';
 
 const MobileNav = () => {
-    const location = useLocation();
+    const navigate = useNavigate();
     const [isVisible, setIsVisible] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -28,7 +28,7 @@ const MobileNav = () => {
 
     const navItems = [
         { path: '/', icon: Home, label: 'Home' },
-        { path: '/skin-treatments', icon: Sparkles, label: 'Skin' },
+        { path: '/skin-treatments', icon: Droplet, label: 'Skin' },
         { path: '/hair-treatments', icon: Sparkles, label: 'Hair' },
         { path: '/about', icon: Info, label: 'About' }
     ];
@@ -38,29 +38,41 @@ const MobileNav = () => {
         window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
     };
 
+    const handleNavClick = (path) => {
+        navigate(path);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     return (
         <nav className={`mobile-bottom-nav ${isVisible ? 'visible' : 'hidden'}`}>
             {navItems.map((item) => {
                 const Icon = item.icon;
-                const isActive = location.pathname === item.path;
 
                 return (
-                    <Link
+                    <NavLink
                         key={item.path}
                         to={item.path}
-                        className={`mobile-nav-item ${isActive ? 'active' : ''}`}
+                        className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            handleNavClick(item.path);
+                        }}
                     >
-                        <div className="nav-icon-wrapper">
-                            <Icon size={20} strokeWidth={isActive ? 2.5 : 1.5} />
-                            {isActive && <span className="active-dot"></span>}
-                        </div>
-                        <span className="nav-label">{item.label}</span>
-                    </Link>
+                        {({ isActive }) => (
+                            <>
+                                <div className="nav-icon-wrapper">
+                                    <Icon size={22} strokeWidth={isActive ? 2.5 : 2} />
+                                    {isActive && <span className="active-dot"></span>}
+                                </div>
+                                <span className="nav-label">{item.label}</span>
+                            </>
+                        )}
+                    </NavLink>
                 );
             })}
             <button onClick={handleWhatsApp} className="mobile-nav-item mobile-nav-cta">
                 <div className="nav-icon-wrapper cta-icon">
-                    <Calendar size={18} strokeWidth={2} />
+                    <Calendar size={20} strokeWidth={2} />
                 </div>
                 <span className="nav-label">Book</span>
             </button>

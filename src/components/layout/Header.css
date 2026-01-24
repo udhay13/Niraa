@@ -247,6 +247,11 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.sidebar-header .header-logo .logo-text,
+.sidebar-header .header-logo .logo-accent {
+    color: var(--color-white);
+}
+
 .sidebar-close {
     display: flex;
     align-items: center;
@@ -396,17 +401,20 @@
 
     .header-container {
         padding: 0 var(--space-4);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .header-logo {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
+        position: relative;
+        left: auto;
+        transform: none;
         transition: transform 0.3s ease;
     }
 
     .header-logo:active {
-        transform: translateX(-50%) scale(0.98);
+        transform: scale(0.98);
     }
 
     .logo-text {
@@ -424,6 +432,7 @@
         z-index: 10;
         color: #1a1a2e;
         transition: all 0.2s ease;
+        margin-left: auto;
     }
 
     .mobile-menu-toggle:hover {
