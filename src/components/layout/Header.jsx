@@ -93,7 +93,6 @@ const Header = () => {
                         </div>
                     </div>
 
-                    <Link to="/technology" className="nav-link">Technology</Link>
                     <Link to="/blogs" className="nav-link">Blogs</Link>
                     <Link to="/about" className="nav-link">About Us</Link>
                     <Link to="/contact" className="nav-link">Contact</Link>
@@ -178,7 +177,6 @@ const Header = () => {
                         </div>
                     </div>
 
-                    <Link to="/technology" className="sidebar-link" onClick={() => setIsMobileMenuOpen(false)}>Technology</Link>
                     <Link to="/blogs" className="sidebar-link" onClick={() => setIsMobileMenuOpen(false)}>Blogs</Link>
                     <Link to="/about" className="sidebar-link" onClick={() => setIsMobileMenuOpen(false)}>About Us</Link>
                     <Link to="/contact" className="sidebar-link" onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>

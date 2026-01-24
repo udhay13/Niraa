@@ -6,8 +6,7 @@ import {
     Instagram,
     Facebook,
     Youtube,
-    Clock,
-    ArrowRight
+    Clock
 } from 'lucide-react';
 import './Footer.css';
 
@@ -29,33 +28,12 @@ const Footer = () => {
 
     const quickLinks = [
         { name: 'About Us', path: '/about' },
-        { name: 'Our Technology', path: '/technology' },
         { name: 'Blog', path: '/blogs' },
         { name: 'Contact Us', path: '/contact' },
     ];
 
     return (
         <footer className="footer">
-            {/* CTA Section */}
-            <div className="footer-cta">
-                <div className="container">
-                    <div className="cta-content">
-                        <div className="cta-text">
-                            <h3>Ready to Transform Your Skin & Hair?</h3>
-                            <p>Book your consultation today and take the first step towards your aesthetic goals.</p>
-                        </div>
-                        <a
-                            href="https://wa.me/919876543210?text=Hello!%20I%20would%20like%20to%20book%20an%20appointment%20at%20Nira%20Aesthetics."
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn btn-white btn-lg"
-                        >
-                            Book Appointment <ArrowRight size={20} />
-                        </a>
-                    </div>
-                </div>
-            </div>
-
             {/* Main Footer */}
             <div className="footer-main">
                 <div className="container">

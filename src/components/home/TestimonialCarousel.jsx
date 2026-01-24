@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 import './TestimonialCarousel.css';
 
 const TestimonialCarousel = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+    const touchStartX = useRef(0);
+    const touchEndX = useRef(0);
 
     const testimonials = [
         {
@@ -13,7 +15,7 @@ const TestimonialCarousel = () => {
             treatment: 'Laser Hair Reduction',
             rating: 5,
             text: 'After just 4 sessions, I can see a dramatic reduction in hair growth. The treatment was virtually painless thanks to their advanced cooling technology. The staff is professional and the clinic feels so premium!',
-            image: 'https://randomuser.me/api/portraits/women/44.jpg'
+            image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80'
         },
         {
             id: 2,
@@ -21,7 +23,7 @@ const TestimonialCarousel = () => {
             treatment: 'Acne Scar Treatment',
             rating: 5,
             text: 'I had deep acne scars for years that affected my confidence. Dr. Niraa\'s team used a combination of lasers and PRP that gave me incredible results. My skin texture has improved significantly!',
-            image: 'https://randomuser.me/api/portraits/men/32.jpg'
+            image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80'
         },
         {
             id: 3,
@@ -29,7 +31,7 @@ const TestimonialCarousel = () => {
             treatment: 'HydraFacial',
             rating: 5,
             text: 'The HydraFacial here is the best I\'ve ever had! My skin was glowing immediately after, and the results lasted for weeks. I\'ve made it a monthly ritual now. Highly recommend!',
-            image: 'https://randomuser.me/api/portraits/women/68.jpg'
+            image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80'
         },
         {
             id: 4,
@@ -37,7 +39,7 @@ const TestimonialCarousel = () => {
             treatment: 'PRP Hair Treatment',
             rating: 5,
             text: 'Was skeptical about PRP at first, but the results speak for themselves. My hairline has improved and new hair growth is visible. The team explained everything thoroughly and made me feel comfortable.',
-            image: 'https://randomuser.me/api/portraits/men/75.jpg'
+            image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80'
         },
         {
             id: 5,
@@ -45,7 +47,7 @@ const TestimonialCarousel = () => {
             treatment: 'Anti-Ageing Treatment',
             rating: 5,
             text: 'The RF skin tightening treatment has taken years off my face! The fine lines around my eyes are barely visible now. Love how natural the results look - no one knows I had any work done!',
-            image: 'https://randomuser.me/api/portraits/women/90.jpg'
+            image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80'
         }
     ];
 
@@ -74,6 +76,30 @@ const TestimonialCarousel = () => {
         setCurrentIndex(index);
     };
 
+    // Touch handlers for mobile swipe
+    const handleTouchStart = (e) => {
+        touchStartX.current = e.touches[0].clientX;
+    };
+
+    const handleTouchMove = (e) => {
+        touchEndX.current = e.touches[0].clientX;
+    };
+
+    const handleTouchEnd = () => {
+        const swipeThreshold = 50;
+        const diff = touchStartX.current - touchEndX.current;
+
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                // Swiped left - go to next
+                goToNext();
+            } else {
+                // Swiped right - go to previous
+                goToPrev();
+            }
+        }
+    };
+
     return (
         <section className="testimonials-section section">
             <div className="container">
@@ -91,7 +117,12 @@ const TestimonialCarousel = () => {
                         <ChevronLeft size={24} />
                     </button>
 
-                    <div className="carousel-container">
+                    <div
+                        className="carousel-container"
+                        onTouchStart={handleTouchStart}
+                        onTouchMove={handleTouchMove}
+                        onTouchEnd={handleTouchEnd}
+                    >
                         <div
                             className="carousel-track"
                             style={{ transform: `translateX(-${currentIndex * 100}%)` }}

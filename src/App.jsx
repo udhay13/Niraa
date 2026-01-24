@@ -8,7 +8,6 @@ import Home from './pages/Home';
 import SkinTreatments from './pages/SkinTreatments';
 import HairTreatments from './pages/HairTreatments';
 import TreatmentDetail from './pages/TreatmentDetail';
-import Technology from './pages/Technology';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import BlogList from './pages/BlogList';
@@ -35,7 +34,6 @@ function App() {
             <Route path="skin-treatments" element={<SkinTreatments />} />
             <Route path="hair-treatments" element={<HairTreatments />} />
             <Route path="treatments/:id" element={<TreatmentDetail />} />
-            <Route path="technology" element={<Technology />} />
             <Route path="about" element={<About />} />
             <Route path="contact" element={<Contact />} />
             <Route path="blogs" element={<BlogList />} />
