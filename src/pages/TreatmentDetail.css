@@ -930,7 +930,7 @@
 
 @media (max-width: 768px) {
     .treatment-hero {
-        padding: var(--space-8) 0 var(--space-12);
+        padding-top: 5.5rem;
     }
 
     .hero-title {
