@@ -381,46 +381,62 @@
 
 @media (max-width: 768px) {
 
-    /* Myntra-style box hero on mobile */
+    /* Mobile Hero - Clean Modern Design */
     .hero-carousel {
+        position: relative;
         height: auto;
         min-height: auto;
-        padding: 60px 16px 16px;
-        background: #f8f8f8;
+        padding: 70px 12px 0 12px;
+        background: #f5f5f5;
+        overflow: visible;
     }
 
     .slides-container {
-        border-radius: 16px;
+        position: relative;
+        width: 100%;
+        height: 360px;
+        border-radius: 20px;
         overflow: hidden;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
     }
 
     .hero-slide {
-        position: relative;
-        height: 420px;
-        border-radius: 16px;
-    }
-
-    .hero-slide.active {
-        position: relative;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        border-radius: 20px;
     }
 
     .slide-overlay {
-        background: linear-gradient(180deg,
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom,
                 transparent 0%,
-                transparent 40%,
-                rgba(0, 0, 0, 0.7) 100%);
-        border-radius: 16px;
+                rgba(0, 0, 0, 0.2) 50%,
+                rgba(0, 0, 0, 0.8) 100%);
+        border-radius: 20px;
     }
 
     .slide-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        align-items: flex-start;
-        padding: 20px;
-        text-align: left;
-        height: 100%;
+        align-items: center;
+        padding: 16px 16px 80px;
+        text-align: center;
+        height: auto;
+        grid-template-columns: 1fr;
     }
 
     .slide-text {
@@ -428,21 +444,25 @@
     }
 
     .slide-badge {
-        font-size: 9px;
-        padding: 4px 10px;
-        margin-bottom: 8px;
+        font-size: 10px;
+        padding: 5px 12px;
+        margin-bottom: 10px;
+        display: inline-flex;
     }
 
     .slide-title {
-        font-size: 22px;
-        margin-bottom: 4px;
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 6px;
         line-height: 1.2;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
 
     .slide-subtitle {
         font-size: 14px;
-        margin-bottom: 6px;
+        margin-bottom: 0;
         opacity: 0.9;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     }
 
     .slide-description {
@@ -454,36 +474,52 @@
     }
 
     .slide-cta {
+        display: flex;
         flex-direction: row;
-        gap: 8px;
-        margin-top: 12px;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 8px;
+        width: 100%;
     }
 
     .slide-cta .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+        padding: 5px 10px;
+        font-size: 10px;
+        font-weight: 500;
+        border-radius: 12px;
         width: auto;
-        padding: 10px 16px;
-        font-size: 12px;
-        border-radius: 20px;
+        letter-spacing: 0.01em;
     }
 
     .slide-cta .btn-primary {
         background: linear-gradient(135deg, #d4af37 0%, #f5d77a 100%);
         color: #1a1a2e;
+        box-shadow: 0 2px 6px rgba(212, 175, 55, 0.25);
     }
 
     .slide-cta .btn-outline-light {
-        background: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(4px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+        padding: 4px 8px;
     }
 
-    /* Indicators - dots style */
+    /* Indicators below the slider */
     .slide-indicators {
         position: relative;
         bottom: auto;
-        margin-top: 12px;
+        left: auto;
+        transform: none;
+        display: flex;
         justify-content: center;
         gap: 6px;
+        padding: 14px 0;
+        background: #f5f5f5;
     }
 
     .indicator {
@@ -491,12 +527,16 @@
         height: 8px;
         border-radius: 50%;
         background: #ddd;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        transition: all 0.3s ease;
     }
 
     .indicator.active {
         background: #d4af37;
-        width: 20px;
-        border-radius: 10px;
+        width: 24px;
+        border-radius: 12px;
     }
 
     .indicator-progress {
