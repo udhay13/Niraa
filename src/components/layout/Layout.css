@@ -7,6 +7,6 @@
 /* Add bottom padding only on mobile for the fixed bottom nav */
 @media (max-width: 768px) {
     .main-content {
-        padding-bottom: 80px;
+        padding-bottom: 60px;
     }
 }
