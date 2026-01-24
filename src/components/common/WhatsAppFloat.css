@@ -84,13 +84,6 @@
 
 @media (max-width: 768px) {
     .whatsapp-float {
-        width: 44px;
-        height: 44px;
-        bottom: var(--space-4);
-        right: var(--space-4);
-    }
-
-    .whatsapp-tooltip {
         display: none;
     }
 }
