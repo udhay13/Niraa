@@ -5,9 +5,18 @@ import './BlogDetail.css';
 
 const BlogDetail = () => {
     const { slug } = useParams();
-    const { getBlogBySlug, getPublishedBlogs } = useBlog();
+    const { getBlogBySlug, getPublishedBlogs, loading } = useBlog();
     const blog = getBlogBySlug(slug);
     const allBlogs = getPublishedBlogs();
+
+    if (loading) {
+        return (
+            <div className="admin-loading">
+                <div className="spinner"></div>
+                <p>Loading article...</p>
+            </div>
+        );
+    }
 
     if (!blog) {
         return (
@@ -98,11 +107,18 @@ const BlogDetail = () => {
                     <article className="blog-article">
                         <div className="featured-image">
                             <img
-                                src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                                src={blog.image || "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"}
                                 alt={blog.title}
+                                onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"; }}
                             />
                         </div>
                         <div className="article-content">
+                            {blog.excerpt && (
+                                <p className="article-lead">
+                                    <em>{blog.excerpt}</em>
+                                </p>
+                            )}
+                            <hr className="divider" />
                             {renderContent(blog.content)}
                         </div>
 

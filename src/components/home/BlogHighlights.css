@@ -31,7 +31,8 @@
     transform: scale(1.05);
 }
 
-.blog-category {
+/* Scoped to card */
+.blog-card .blog-category {
     position: absolute;
     top: var(--space-3);
     left: var(--space-3);

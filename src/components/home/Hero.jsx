@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles, Phone, ChevronLeft, ChevronRight, Clock } from 'lucide-react';
+import { ArrowRight, Sparkles, Phone } from 'lucide-react';
 import './Hero.css';
 
 // Hero slider data - 4 templates
-const heroSlides = [
+const heroSlidesData = [
     {
         id: 1,
         title: 'Flaunt Your Glow',
@@ -51,17 +51,30 @@ const heroSlides = [
     }
 ];
 
-const DURATIONS = [1000, 2000, 3000, 5000]; // 1s, 2s, 3s, 5s
+// Add clone of first slide for infinite scroll effect
+const heroSlides = [...heroSlidesData, { ...heroSlidesData[0], id: 'clone-1' }];
 
 const Hero = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
-    const [autoScrollDuration, setAutoScrollDuration] = useState(2000); // Default 2 seconds
+    const [autoScrollDuration, setAutoScrollDuration] = useState(5000); // Default 5 seconds
     const [isAutoScrollEnabled, setIsAutoScrollEnabled] = useState(true);
+    const [isMobile, setIsMobile] = useState(false);
     const scrollContainerRef = useRef(null);
     const isDraggingRef = useRef(false);
     const startXRef = useRef(0);
     const scrollLeftRef = useRef(0);
     const autoScrollTimerRef = useRef(null);
+    const resetTimerRef = useRef(null);
+
+    // Check for mobile device
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     // Update current slide based on scroll position
     useEffect(() => {
@@ -79,28 +92,53 @@ const Hero = () => {
         return () => container.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Auto-scroll functionality
+    // Auto-scroll functionality with Infinite Loop
     useEffect(() => {
-        if (!isAutoScrollEnabled) return;
+        if (!isAutoScrollEnabled || isMobile) return;
 
         const startAutoScroll = () => {
             autoScrollTimerRef.current = setInterval(() => {
                 setCurrentSlide((prev) => {
-                    const nextSlide = (prev + 1) % heroSlides.length;
-                    scrollToSlide(nextSlide);
-                    return nextSlide;
+                    const nextIndex = prev + 1;
+
+                    // If we are moving to the clone (last item)
+                    if (nextIndex === heroSlides.length - 1) {
+                        scrollToSlide(nextIndex);
+
+                        // Wait for animation to finish then silent reset
+                        resetTimerRef.current = setTimeout(() => {
+                            const container = scrollContainerRef.current;
+                            if (container) {
+                                container.style.scrollBehavior = 'auto'; // Disable smooth scroll
+                                container.scrollLeft = 0; // Jump to start
+                                setCurrentSlide(0);
+                                setTimeout(() => { // Re-enable smooth scroll
+                                    container.style.scrollBehavior = 'smooth';
+                                }, 50);
+                            }
+                        }, 600); // 600ms matches smooth scroll duration roughly
+
+                        return nextIndex;
+                    }
+
+                    // Normal transition
+                    if (nextIndex < heroSlides.length - 1) {
+                        scrollToSlide(nextIndex);
+                        return nextIndex;
+                    }
+
+                    return 0; // Fallback
                 });
-            }, autoScrollDuration);
+            }, 5000); // 5 seconds
         };
 
         startAutoScroll();
 
         return () => {
-            if (autoScrollTimerRef.current) {
-                clearInterval(autoScrollTimerRef.current);
-            }
+            if (autoScrollTimerRef.current) clearInterval(autoScrollTimerRef.current);
+            if (resetTimerRef.current) clearTimeout(resetTimerRef.current);
         };
-    }, [autoScrollDuration, isAutoScrollEnabled]);
+    }, [isAutoScrollEnabled, isMobile]);
 
     // Desktop drag-to-scroll functionality
     useEffect(() => {
@@ -136,8 +174,10 @@ const Hero = () => {
             container.style.cursor = 'grab';
             container.style.userSelect = '';
 
-            // Resume auto-scroll after a delay
-            setTimeout(() => setIsAutoScrollEnabled(true), 3000);
+            // Resume auto-scroll after a delay if not mobile
+            if (!isMobile) {
+                setTimeout(() => setIsAutoScrollEnabled(true), 3000);
+            }
         };
 
         const handleMouseLeave = () => {
@@ -146,8 +186,10 @@ const Hero = () => {
             container.style.cursor = 'grab';
             container.style.userSelect = '';
 
-            // Resume auto-scroll after a delay
-            setTimeout(() => setIsAutoScrollEnabled(true), 3000);
+            // Resume auto-scroll after a delay if not mobile
+            if (!isMobile) {
+                setTimeout(() => setIsAutoScrollEnabled(true), 3000);
+            }
         };
 
         container.addEventListener('mousedown', handleMouseDown);
@@ -174,6 +216,8 @@ const Hero = () => {
         });
     };
 
+
+
     const goToNext = () => {
         const nextSlide = (currentSlide + 1) % heroSlides.length;
         setCurrentSlide(nextSlide);
@@ -194,15 +238,20 @@ const Hero = () => {
         setTimeout(() => setIsAutoScrollEnabled(true), 3000);
     };
 
-    const toggleDuration = () => {
-        const currentIndex = DURATIONS.indexOf(autoScrollDuration);
-        const nextIndex = (currentIndex + 1) % DURATIONS.length;
-        setAutoScrollDuration(DURATIONS[nextIndex]);
-    };
+
 
     const handleWhatsApp = () => {
         const message = encodeURIComponent('Hello! I would like to book a consultation at Niraa Aesthetics.');
         window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
+    };
+
+    const handleBlockClick = (index) => {
+        setCurrentSlide(index);
+        scrollToSlide(index);
+
+        // Reset auto scroll timer to restart interaction
+        setIsAutoScrollEnabled(false);
+        setTimeout(() => setIsAutoScrollEnabled(true), 100);
     };
 
     return (
@@ -265,47 +314,19 @@ const Hero = () => {
                 ))}
             </div>
 
-            {/* Desktop Navigation Controls */}
+            {/* Progress Blocks (Replacing Indicators & Toggle) */}
             <div className="hero-controls">
-                <button
-                    className="nav-arrow prev"
-                    onClick={(e) => { e.stopPropagation(); goToPrev(); }}
-                    aria-label="Previous slide"
-                >
-                    <ChevronLeft size={32} />
-                </button>
-
-                <button
-                    className="nav-arrow next"
-                    onClick={(e) => { e.stopPropagation(); goToNext(); }}
-                    aria-label="Next slide"
-                >
-                    <ChevronRight size={32} />
-                </button>
-
-                {/* Duration Toggle */}
-                <button
-                    className="duration-toggle"
-                    onClick={(e) => { e.stopPropagation(); toggleDuration(); }}
-                    title="Change auto-scroll speed"
-                >
-                    <Clock size={14} />
-                    <span>{autoScrollDuration / 1000}s</span>
-                </button>
-            </div>
-
-            {/* Slide Indicators */}
-            <div className="slide-indicators">
-                {heroSlides.map((_, index) => (
-                    <button
-                        key={index}
-                        className={`indicator ${index === currentSlide ? 'active' : ''}`}
-                        onClick={() => scrollToSlide(index)}
-                        aria-label={`Go to slide ${index + 1}`}
-                    >
-                        <span className="indicator-progress"></span>
-                    </button>
-                ))}
+                <div className="progress-blocks-container">
+                    {heroSlidesData.map((_, index) => (
+                        <div
+                            key={index}
+                            className={`progress-block ${index === (currentSlide % heroSlidesData.length) ? 'active' : ''} ${index === (currentSlide % heroSlidesData.length) && isAutoScrollEnabled && !isMobile ? 'animating' : ''}`}
+                            onClick={(e) => { e.stopPropagation(); handleBlockClick(index); }}
+                        >
+                            <div className="progress-fill"></div>
+                        </div>
+                    ))}
+                </div>
             </div>
 
             {/* Bottom Contact Bar */}

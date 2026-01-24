@@ -23,18 +23,18 @@ const Header = () => {
     }, [location]);
 
     const skinTreatments = [
-        { name: 'Acne Treatment', path: '/treatments/acne-treatment' },
-        { name: 'Acne Scar Reduction', path: '/treatments/acne-scar-reduction' },
+        { name: 'Acne Treatment', path: '/treatments/chemical-peel' },
+        { name: 'Acne Scar Reduction', path: '/treatments/acne-scar-surgery' },
         { name: 'Pigmentation Treatment', path: '/treatments/pigmentation-treatment' },
-        { name: 'Anti-Ageing & Wrinkle Reduction', path: '/treatments/anti-ageing-treatment' },
-        { name: 'Skin Brightening & Glow', path: '/treatments/skin-brightening' },
-        { name: 'Chemical Peels', path: '/treatments/chemical-peels' },
-        { name: 'Hydra Facial', path: '/treatments/hydra-facial' },
-        { name: 'Laser Skin Rejuvenation', path: '/treatments/laser-skin-rejuvenation' },
+        { name: 'Anti-Ageing & Wrinkle Reduction', path: '/treatments/botox-treatment' },
+        { name: 'Skin Brightening & Glow', path: '/treatments/photo-facial' },
+        { name: 'Chemical Peels', path: '/treatments/chemical-peel' },
+        { name: 'Hydra Facial', path: '/treatments/hydrafacial-treatment' },
+        { name: 'Laser Skin Rejuvenation', path: '/treatments/skin-rejuvenation' },
     ];
 
     const hairTreatments = [
-        { name: 'Laser Hair Reduction', path: '/treatments/laser-hair-reduction' },
+        { name: 'Laser Hair Reduction', path: '/treatments/laser-hair-removal' },
         { name: 'Hair Fall Control', path: '/treatments/hair-fall-control' },
         { name: 'PRP Hair Treatment', path: '/treatments/prp-hair-treatment' },
         { name: 'Hair Regrowth Therapy', path: '/treatments/hair-regrowth-therapy' },

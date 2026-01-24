@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Lock, Eye, EyeOff } from 'lucide-react';
 import { useBlog } from '../../context/BlogContext';
 import './AdminLogin.css';
 
 const AdminLogin = () => {
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
@@ -12,25 +13,33 @@ const AdminLogin = () => {
     const { login, isAdmin } = useBlog();
     const navigate = useNavigate();
 
-    // Redirect if already logged in
-    if (isAdmin) {
-        navigate('/admin/dashboard');
-        return null;
-    }
+    // Debug logging
+    useEffect(() => {
+        console.log("AdminLogin mounted, isAdmin:", isAdmin);
+    }, [isAdmin]);
 
-    const handleSubmit = (e) => {
+    // Redirect if already logged in used useEffect to avoid render-phase side-effects
+    useEffect(() => {
+        if (isAdmin) {
+            console.log("AdminLogin redirecting to dashboard");
+            navigate('/admin/dashboard');
+        }
+    }, [isAdmin, navigate]);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
         setIsLoading(true);
 
-        setTimeout(() => {
-            if (login(password)) {
-                navigate('/admin/dashboard');
-            } else {
-                setError('Invalid password. Please try again.');
-            }
+        try {
+            await login(email, password);
+            navigate('/admin/dashboard');
+        } catch (err) {
+            setError('Failed to login. Please check your credentials.');
+            console.error(err);
+        } finally {
             setIsLoading(false);
-        }, 500);
+        }
     };
 
     return (
@@ -52,6 +61,18 @@ const AdminLogin = () => {
                                 {error}
                             </div>
                         )}
+
+                        <div className="form-group">
+                            <label className="form-label">Email</label>
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="form-input"
+                                placeholder="admin@example.com"
+                                required
+                            />
+                        </div>
 
                         <div className="form-group">
                             <label className="form-label">Password</label>

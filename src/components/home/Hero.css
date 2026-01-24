@@ -638,75 +638,258 @@
    ======================================== */
 .hero-controls {
     position: absolute;
-    inset: 0;
-    pointer-events: none;
+    bottom: 80px;
+    /* Above bottom bar */
+    right: 40px;
     z-index: 10;
+    pointer-events: none;
 }
 
-.nav-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 56px;
-    height: 56px;
+.controls-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    pointer-events: auto;
+}
+
+/* Animated Play/Pause Toggle */
+.play-pause-toggle {
+    position: relative;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    color: white;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    pointer-events: auto;
     transition: all 0.3s ease;
 }
 
-.nav-arrow:hover {
-    background: rgba(212, 175, 55, 0.9);
+.play-pause-toggle:hover {
+    background: #d4af37;
     border-color: #d4af37;
-    color: #1a1a2e;
-    transform: translateY(-50%) scale(1.1);
+    transform: scale(1.1);
 }
 
-.nav-arrow.prev {
-    left: 40px;
+.toggle-icon {
+    display: block;
+    width: 12px;
+    height: 12px;
+    transition: all 0.3s ease;
 }
 
-.nav-arrow.next {
-    right: 40px;
+/* Play Icon state */
+.play-pause-toggle.paused .toggle-icon {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 7px 0 7px 12px;
+    border-color: transparent transparent transparent #fff;
+    margin-left: 4px;
+    /* Optical centering */
 }
 
-.duration-toggle {
+/* Pause Icon state */
+.play-pause-toggle.playing .toggle-icon {
+    width: 10px;
+    height: 12px;
+    border-style: double;
+    /* Creates two lines */
+    border-width: 0 0 0 10px;
+    /* Trick for double lines using border-left? Better to use simpler method */
+    border-left: 3px solid #fff;
+    border-right: 3px solid #fff;
+    background: transparent;
+    border-top: 0;
+    border-bottom: 0;
+    box-sizing: content-box;
+    /* Actually a simpler pause icon: */
+    border: none;
+    box-shadow: inset 4px 0 0 #fff, inset -4px 0 0 #fff;
+    /* Two bars */
+    background: transparent;
+}
+
+.play-pause-toggle:hover.paused .toggle-icon {
+    border-color: transparent transparent transparent #1a1a2e;
+}
+
+.play-pause-toggle:hover.playing .toggle-icon {
+    box-shadow: inset 4px 0 0 #1a1a2e, inset -4px 0 0 #1a1a2e;
+}
+
+/* Rotating Ring */
+.toggle-ring {
     position: absolute;
-    top: 100px;
-    /* Below navbar */
-    right: 40px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    inset: -2px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: #d4af37;
+    border-right-color: transparent;
+    /* Partial ring */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.play-pause-toggle.playing .toggle-ring {
+    opacity: 1;
+    animation: spin 2s linear infinite;
+}
+
+.play-pause-toggle:hover .toggle-ring {
+    display: none;
+    /* Hide ring on hover for cleaner look */
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Duration Display */
+.duration-display {
     padding: 6px 12px;
-    background: rgba(0, 0, 0, 0.6);
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 12px;
+    color: #fff;
+    font-size: 13px;
     font-weight: 600;
     cursor: pointer;
+    transition: all 0.2s;
+    min-width: 40px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.duration-display:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* ========================================
+   Hero Progress Blocks
+   ======================================== */
+.hero-controls {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+    right: auto;
+}
+
+.progress-blocks-container {
+    display: flex;
+    gap: 8px;
+    /* Tighter gap */
     pointer-events: auto;
-    transition: all 0.2s ease;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 6px 14px;
+    /* Smaller padding */
+    border-radius: 40px;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.duration-toggle:hover {
+.progress-block {
+    position: relative;
+    width: 24px;
+    /* Smaller width (was 30px) */
+    height: 3px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.progress-block:hover {
+    height: 4px;
+    /* Reduced hover growth */
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
     background: #d4af37;
-    color: #1a1a2e;
-    border-color: #d4af37;
+    border-radius: 2px;
 }
 
-/* Hide controls on mobile */
+/* Active block fill animation */
+.progress-block.active .progress-fill {
+    width: 100%;
+}
+
+.progress-block.filled .progress-fill {
+    width: 100%;
+    transition: none;
+    /* Instant fill for passed slides */
+}
+
+/* Animate the fill only for the current active slide */
+.progress-block.animating .progress-fill {
+    animation: fillProgress 5s linear forwards;
+}
+
+/* Pause animation on hover */
+.progress-blocks-container:hover .progress-fill {
+    animation-play-state: paused;
+}
+
+@keyframes fillProgress {
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
+    .progress-blocks-container {
+        padding: 4px 8px;
+        /* Tighter padding */
+        gap: 4px;
+        /* Tighter gap */
+        background: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(4px);
+    }
+
+    .progress-block {
+        width: 10px;
+        /* Very small width */
+        height: 2px;
+        /* Very thin */
+    }
+
+    .progress-block:hover {
+        height: 2px;
+        /* disable hover grow */
+    }
+
+    /* Enable controls on mobile now */
     .hero-controls {
-        display: none;
+        display: flex;
+        bottom: 15px;
+        /* Placed little down */
     }
 }

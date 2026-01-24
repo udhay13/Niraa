@@ -4,8 +4,29 @@ import { useBlog } from '../context/BlogContext';
 import './BlogList.css';
 
 const BlogList = () => {
-    const { getPublishedBlogs } = useBlog();
+    const { getPublishedBlogs, loading, error } = useBlog();
     const blogs = getPublishedBlogs();
+
+    if (loading) {
+        return (
+            <div className="page-loading">
+                <div className="spinner"></div>
+                <p>Loading Expert Insights...</p>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="error-container" style={{ textAlign: 'center', padding: '4rem', color: 'var(--color-error)' }}>
+                <h2>Connection Error</h2>
+                <p>{error}</p>
+                <p style={{ fontSize: '0.9rem', marginTop: '1rem', color: 'var(--color-text-light)' }}>
+                    Check your Firestore Database Rules or API Keys.
+                </p>
+            </div>
+        );
+    }
 
     return (
         <div className="blog-list-page">
@@ -43,13 +64,14 @@ const BlogList = () => {
                                 >
                                     <div className="blog-image">
                                         <img
-                                            src={`https://images.unsplash.com/photo-157017261964${(index % 6) + 4}-dfd03ed5d881?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80`}
+                                            src={blog.image || `https://images.unsplash.com/photo-157017261964${(index % 6) + 4}-dfd03ed5d881?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80`}
                                             alt={blog.title}
                                             onError={(e) => {
                                                 e.target.src = 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80';
                                             }}
+                                            style={{ objectFit: 'cover' }}
                                         />
-                                        <span className="blog-category">{blog.category}</span>
+                                        <span className="blog-grid-category">{blog.category}</span>
                                     </div>
                                     <div className="blog-content">
                                         <div className="blog-meta">

@@ -6,10 +6,11 @@ import {
     Trash2,
     LogOut,
     Eye,
-    EyeOff,
     Save,
     X,
-    FileText
+    FileText,
+    Link as LinkIcon,
+    Image as ImageIcon
 } from 'lucide-react';
 import { useBlog } from '../../context/BlogContext';
 import './AdminDashboard.css';
@@ -21,7 +22,8 @@ const AdminDashboard = () => {
         logout,
         addBlog,
         updateBlog,
-        deleteBlog
+        deleteBlog,
+        seedBlogs
     } = useBlog();
     const navigate = useNavigate();
 
@@ -31,6 +33,7 @@ const AdminDashboard = () => {
         title: '',
         excerpt: '',
         content: '',
+        image: '',
         category: 'Skin Care',
         tags: '',
         isPublished: false
@@ -53,6 +56,7 @@ const AdminDashboard = () => {
             title: '',
             excerpt: '',
             content: '',
+            image: '',
             category: 'Skin Care',
             tags: '',
             isPublished: false
@@ -66,6 +70,7 @@ const AdminDashboard = () => {
             title: blog.title,
             excerpt: blog.excerpt,
             content: blog.content,
+            image: blog.image || '',
             category: blog.category,
             tags: blog.tags ? blog.tags.join(', ') : '',
             isPublished: blog.isPublished
@@ -73,9 +78,26 @@ const AdminDashboard = () => {
         setShowEditor(true);
     };
 
+    const [deleteTargetId, setDeleteTargetId] = useState(null);
+    const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+
+    // ... (rest of handles)
+
     const handleDelete = (id) => {
-        if (window.confirm('Are you sure you want to delete this blog post?')) {
-            deleteBlog(id);
+        setDeleteTargetId(id);
+        setShowDeleteConfirm(true);
+    };
+
+    const confirmDelete = async () => {
+        if (!deleteTargetId) return;
+
+        try {
+            await deleteBlog(deleteTargetId);
+            setShowDeleteConfirm(false);
+            setDeleteTargetId(null);
+        } catch (error) {
+            console.error("Delete failed:", error);
+            alert("Failed to delete blog: " + error.message);
         }
     };
 
@@ -107,7 +129,12 @@ const AdminDashboard = () => {
     };
 
     if (!isAdmin) {
-        return null;
+        return (
+            <div className="admin-loading">
+                <div className="spinner"></div>
+                <p>Redirecting to login...</p>
+            </div>
+        );
     }
 
     return (
@@ -140,10 +167,17 @@ const AdminDashboard = () => {
             <main className="admin-main">
                 <header className="admin-header">
                     <h1>Blog Management</h1>
-                    <button className="btn btn-primary" onClick={handleNewPost}>
-                        <Plus size={18} />
-                        New Post
-                    </button>
+                    <div className="header-actions" style={{ display: 'flex', gap: '1rem' }}>
+                        {blogs.length === 0 && (
+                            <button className="btn btn-secondary" onClick={seedBlogs}>
+                                Seed Database
+                            </button>
+                        )}
+                        <button className="btn btn-primary" onClick={handleNewPost}>
+                            <Plus size={18} />
+                            New Post
+                        </button>
+                    </div>
                 </header>
 
                 {/* Blog List */}
@@ -238,6 +272,46 @@ const AdminDashboard = () => {
                                 />
                             </div>
 
+                            <div className="form-group">
+                                <label className="form-label">Featured Image (URL)</label>
+                                <input
+                                    type="text"
+                                    name="image"
+                                    value={formData.image}
+                                    onChange={handleChange}
+                                    className="form-input"
+                                    placeholder="Paste direct image link (e.g. from Unsplash)"
+                                />
+                                {formData.image && formData.image.includes('unsplash.com/photos') && (
+                                    <small style={{ color: '#d97706', marginTop: '4px', display: 'block' }}>
+                                        ⚠️ You pasted a Page URL. Please right-click the image and select "Copy Image Address".
+                                    </small>
+                                )}
+                                {formData.image && (
+                                    <div style={{ marginTop: '1rem' }}>
+                                        <p style={{ fontSize: '0.8rem', color: 'var(--color-text-light)', marginBottom: '5px' }}>Preview:</p>
+                                        <div style={{ position: 'relative', width: 'fit-content' }}>
+                                            <img
+                                                src={formData.image}
+                                                alt="Preview"
+                                                onError={(e) => {
+                                                    e.target.style.display = 'none';
+                                                    e.target.nextSibling.style.display = 'flex';
+                                                }}
+                                                style={{ height: '150px', borderRadius: '8px', objectFit: 'cover', border: '1px solid #eee' }}
+                                            />
+                                            <div style={{
+                                                display: 'none', height: '150px', width: '200px', background: '#fee2e2',
+                                                borderRadius: '8px', alignItems: 'center', justifyContent: 'center',
+                                                color: '#b91c1c', fontSize: '0.9rem', padding: '10px', textAlign: 'center'
+                                            }}>
+                                                Invalid Image Link
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+
                             <div className="form-row">
                                 <div className="form-group">
                                     <label className="form-label">Category</label>
@@ -312,6 +386,28 @@ const AdminDashboard = () => {
                                 </button>
                             </div>
                         </form>
+                    </div>
+                </div>
+            )}
+            {/* Confirmation Modal */}
+            {showDeleteConfirm && (
+                <div className="editor-modal">
+                    <div className="editor-backdrop" onClick={() => setShowDeleteConfirm(false)}></div>
+                    <div className="editor-content card" style={{ maxWidth: '400px', textAlign: 'center' }}>
+                        <div className="editor-header" style={{ justifyContent: 'center', marginBottom: '1rem' }}>
+                            <h2 style={{ color: 'var(--color-error)' }}>Delete Blog Post?</h2>
+                        </div>
+                        <p style={{ marginBottom: '2rem', color: 'var(--color-text-secondary)' }}>
+                            Are you sure you want to delete this post? This action cannot be undone.
+                        </p>
+                        <div className="editor-actions" style={{ justifyContent: 'center' }}>
+                            <button className="btn btn-secondary" onClick={() => setShowDeleteConfirm(false)}>
+                                Cancel
+                            </button>
+                            <button className="btn" style={{ background: 'var(--color-error)', color: 'white' }} onClick={confirmDelete}>
+                                <Trash2 size={18} /> Yes, Delete
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}

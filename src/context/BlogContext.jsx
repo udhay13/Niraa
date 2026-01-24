@@ -1,52 +1,109 @@
 import { createContext, useContext, useState, useEffect } from 'react';
+import {
+    collection,
+    onSnapshot,
+    addDoc,
+    updateDoc,
+    deleteDoc,
+    doc,
+    query,
+    orderBy
+} from 'firebase/firestore';
+import {
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
+} from 'firebase/auth';
+import { db, auth } from '../config/firebase';
 import { initialBlogPosts } from '../data/blogs';
 
 const BlogContext = createContext();
 
-const STORAGE_KEY = 'nira_aesthetics_blogs';
-const ADMIN_STORAGE_KEY = 'nira_aesthetics_admin';
-
 export const BlogProvider = ({ children }) => {
-    const [blogs, setBlogs] = useState(() => {
-        const stored = localStorage.getItem(STORAGE_KEY);
-        return stored ? JSON.parse(stored) : initialBlogPosts;
-    });
+    const [blogs, setBlogs] = useState([]); // Start empty, load from DB
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    const [isAdmin, setIsAdmin] = useState(() => {
-        return localStorage.getItem(ADMIN_STORAGE_KEY) === 'true';
-    });
-
+    // Auth Listener
     useEffect(() => {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(blogs));
-    }, [blogs]);
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
+        });
+        return () => unsubscribe();
+    }, []);
 
+    // Real-time Blogs Listener
     useEffect(() => {
-        localStorage.setItem(ADMIN_STORAGE_KEY, isAdmin.toString());
-    }, [isAdmin]);
+        const blogsRef = collection(db, 'blogs');
+        // Sort by publishedAt desc
+        const q = query(blogsRef); // order handled in client or simple sort
 
-    const addBlog = (blog) => {
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+            const blogsData = snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            // Sort client-side for simplicity if formatted date string
+            // ISO strings sort naturally
+            blogsData.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
+
+            setBlogs(blogsData);
+            setLoading(false);
+            setError(null); // Clear error on success
+        }, (err) => {
+            console.error("Error fetching blogs:", err);
+            setError(err.message);
+            setLoading(false);
+        });
+
+        return () => unsubscribe();
+    }, []);
+
+    const addBlog = async (blog) => {
         const newBlog = {
             ...blog,
-            id: Date.now().toString(),
             slug: blog.title.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
-            publishedAt: new Date().toISOString().split('T')[0]
+            publishedAt: new Date().toISOString(),
+            createdAt: new Date().toISOString()
         };
-        setBlogs(prev => [newBlog, ...prev]);
-        return newBlog;
+        const docRef = await addDoc(collection(db, 'blogs'), newBlog);
+        return { id: docRef.id, ...newBlog };
     };
 
-    const updateBlog = (id, updates) => {
-        setBlogs(prev => prev.map(blog =>
-            blog.id === id ? { ...blog, ...updates } : blog
-        ));
+    const updateBlog = async (id, updates) => {
+        const blogRef = doc(db, 'blogs', id);
+        // If title is updated, update slug too to keep URL fresh
+        if (updates.title) {
+            updates.slug = updates.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+        }
+        await updateDoc(blogRef, updates);
     };
 
-    const deleteBlog = (id) => {
-        setBlogs(prev => prev.filter(blog => blog.id !== id));
+    const deleteBlog = async (id) => {
+        try {
+            console.log("BlogContext: deleting doc", id);
+            console.log("Current Auth User:", auth.currentUser ? auth.currentUser.uid : "Not Logged In");
+            const blogRef = doc(db, 'blogs', id);
+            await deleteDoc(blogRef);
+        } catch (err) {
+            console.error("Error deleting blog:", err);
+            throw err;
+        }
     };
 
-    const getBlogById = (id) => {
-        return blogs.find(blog => blog.id === id);
+    // Seed Data (One-time use)
+    const seedBlogs = async () => {
+        const blogsRef = collection(db, 'blogs');
+        for (const blog of initialBlogPosts) {
+            // Remove 'id' field to let Firestore generate one, or use setDoc
+            const { id, ...data } = blog;
+            await addDoc(blogsRef, {
+                ...data,
+                publishedAt: new Date().toISOString() // Ensure standard date
+            });
+        }
+        alert('Seeding complete!');
     };
 
     const getBlogBySlug = (slug) => {
@@ -54,41 +111,37 @@ export const BlogProvider = ({ children }) => {
     };
 
     const getPublishedBlogs = () => {
-        return blogs
-            .filter(blog => blog.isPublished)
-            .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
+        return blogs.filter(blog => blog.isPublished);
     };
 
     const getLatestBlogs = (count = 3) => {
         return getPublishedBlogs().slice(0, count);
     };
 
-    const login = (password) => {
-        // Simple password check for demo purposes
-        if (password === 'nira2024') {
-            setIsAdmin(true);
-            return true;
-        }
-        return false;
+    const login = (email, password) => {
+        return signInWithEmailAndPassword(auth, email, password);
     };
 
     const logout = () => {
-        setIsAdmin(false);
+        return signOut(auth);
     };
 
     return (
         <BlogContext.Provider value={{
             blogs,
-            isAdmin,
+            isAdmin: !!user, // Logged in = Admin
+            user,
+            loading,
+            error,
             addBlog,
             updateBlog,
             deleteBlog,
-            getBlogById,
             getBlogBySlug,
             getPublishedBlogs,
             getLatestBlogs,
             login,
-            logout
+            logout,
+            seedBlogs
         }}>
             {children}
         </BlogContext.Provider>
