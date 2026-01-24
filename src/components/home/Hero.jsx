@@ -144,11 +144,21 @@ const Hero = () => {
                                 <p className="slide-description">{slide.description}</p>
 
                                 <div className="slide-cta">
-                                    <button onClick={handleWhatsApp} className="btn btn-primary btn-lg">
+                                    <button
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleWhatsApp();
+                                        }}
+                                        className="btn btn-primary btn-lg"
+                                    >
                                         <Phone size={18} />
                                         Book Consultation
                                     </button>
-                                    <Link to={slide.link} className="btn btn-outline-light btn-lg">
+                                    <Link
+                                        to={slide.link}
+                                        className="btn btn-outline-light btn-lg"
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
                                         {slide.cta}
                                         <ArrowRight size={18} />
                                     </Link>
