@@ -206,100 +206,153 @@
     background: rgba(255, 255, 255, 0.1);
 }
 
-/* Mobile Navigation */
-.mobile-nav {
-    display: none;
+/* Mobile Overlay */
+.mobile-overlay {
     position: fixed;
-    top: 56px;
-    left: 0;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 998;
+    backdrop-filter: blur(4px);
+}
+
+/* Mobile Sidebar */
+.mobile-sidebar {
+    position: fixed;
+    top: 0;
     right: 0;
-    bottom: 0;
+    width: 85%;
+    max-width: 320px;
+    height: 100vh;
+    height: 100dvh;
     background: rgba(26, 26, 46, 0.98);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    padding: var(--space-6);
+    z-index: 999;
+    display: flex;
     flex-direction: column;
-    gap: var(--space-2);
-    overflow-y: auto;
     transform: translateX(100%);
-    transition: transform 0.3s ease;
-    z-index: 100;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
 }
 
-.mobile-nav-open {
+.mobile-sidebar-open {
     transform: translateX(0);
 }
 
-.mobile-nav-link {
+.sidebar-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: var(--space-4);
-    font-size: var(--text-lg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: var(--radius-lg);
+    color: var(--color-white);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.sidebar-close:hover {
+    background: rgba(212, 175, 55, 0.2);
+    color: #d4af37;
+}
+
+.sidebar-nav {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--text-base);
     font-weight: var(--font-medium);
     color: var(--color-white);
     text-decoration: none;
     background: none;
     border: none;
-    border-radius: var(--radius-xl);
+    border-radius: var(--radius-lg);
     cursor: pointer;
     width: 100%;
     text-align: left;
-    transition: all var(--transition-fast);
+    transition: all 0.2s ease;
 }
 
-.mobile-nav-link:hover {
+.sidebar-link:hover {
     background: rgba(255, 255, 255, 0.1);
     color: #d4af37;
 }
 
-.mobile-dropdown-trigger .dropdown-icon {
-    transition: transform var(--transition-fast);
+.sidebar-dropdown-trigger .dropdown-icon {
+    transition: transform 0.2s ease;
     color: rgba(255, 255, 255, 0.5);
 }
 
-.mobile-dropdown-trigger .dropdown-icon.rotated {
+.sidebar-dropdown-trigger .dropdown-icon.rotated {
     transform: rotate(180deg);
 }
 
-.mobile-dropdown-menu {
+.sidebar-dropdown-menu {
     display: none;
     padding-left: var(--space-4);
     flex-direction: column;
-    gap: var(--space-1);
+    gap: 0;
+    margin-top: var(--space-1);
 }
 
-.mobile-dropdown-menu.open {
+.sidebar-dropdown-menu.open {
     display: flex;
 }
 
-.mobile-dropdown-item {
-    padding: var(--space-3) var(--space-4);
-    font-size: var(--text-base);
+.sidebar-dropdown-item {
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--text-sm);
     color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
+    transition: all 0.2s ease;
 }
 
-.mobile-dropdown-item:hover {
-    background: rgba(212, 175, 55, 0.2);
+.sidebar-dropdown-item:hover {
+    background: rgba(212, 175, 55, 0.15);
     color: #d4af37;
 }
 
-.mobile-cta {
+.sidebar-cta {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: var(--space-2);
-    margin-top: auto;
+    margin: var(--space-4);
     padding: var(--space-4);
     background: linear-gradient(135deg, #d4af37 0%, #f5d77a 100%);
     color: #1a1a2e;
-    font-size: var(--text-lg);
+    font-size: var(--text-base);
     font-weight: var(--font-semibold);
     border: none;
     border-radius: var(--radius-xl);
     cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.sidebar-cta:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
 }
 
 /* Responsive */
@@ -314,9 +367,5 @@
 
     .mobile-menu-toggle {
         display: block;
-    }
-
-    .mobile-nav {
-        display: flex;
     }
 }

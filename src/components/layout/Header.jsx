@@ -115,52 +115,76 @@ const Header = () => {
                 </button>
             </div>
 
-            {/* Mobile Navigation */}
-            <div className={`mobile-nav ${isMobileMenuOpen ? 'mobile-nav-open' : ''}`}>
-                <Link to="/" className="mobile-nav-link">Home</Link>
+            {/* Mobile Sidebar Overlay */}
+            {isMobileMenuOpen && (
+                <div
+                    className="mobile-overlay"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                ></div>
+            )}
 
-                <div className="mobile-nav-dropdown">
+            {/* Mobile Sidebar Navigation */}
+            <div className={`mobile-sidebar ${isMobileMenuOpen ? 'mobile-sidebar-open' : ''}`}>
+                <div className="sidebar-header">
+                    <Link to="/" className="header-logo" onClick={() => setIsMobileMenuOpen(false)}>
+                        <span className="logo-text">Niraa</span>
+                        <span className="logo-accent">Aesthetics</span>
+                    </Link>
                     <button
-                        className="mobile-nav-link mobile-dropdown-trigger"
-                        onClick={() => toggleDropdown('skin')}
+                        className="sidebar-close"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        aria-label="Close menu"
                     >
-                        Skin Treatments
-                        <ChevronDown className={`dropdown-icon ${activeDropdown === 'skin' ? 'rotated' : ''}`} size={18} />
+                        <X size={24} />
                     </button>
-                    <div className={`mobile-dropdown-menu ${activeDropdown === 'skin' ? 'open' : ''}`}>
-                        <Link to="/skin-treatments" className="mobile-dropdown-item">All Skin Treatments</Link>
-                        {skinTreatments.map((item) => (
-                            <Link key={item.path} to={item.path} className="mobile-dropdown-item">
-                                {item.name}
-                            </Link>
-                        ))}
-                    </div>
                 </div>
 
-                <div className="mobile-nav-dropdown">
-                    <button
-                        className="mobile-nav-link mobile-dropdown-trigger"
-                        onClick={() => toggleDropdown('hair')}
-                    >
-                        Hair Treatments
-                        <ChevronDown className={`dropdown-icon ${activeDropdown === 'hair' ? 'rotated' : ''}`} size={18} />
-                    </button>
-                    <div className={`mobile-dropdown-menu ${activeDropdown === 'hair' ? 'open' : ''}`}>
-                        <Link to="/hair-treatments" className="mobile-dropdown-item">All Hair Treatments</Link>
-                        {hairTreatments.map((item) => (
-                            <Link key={item.path} to={item.path} className="mobile-dropdown-item">
-                                {item.name}
-                            </Link>
-                        ))}
+                <nav className="sidebar-nav">
+                    <Link to="/" className="sidebar-link" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
+
+                    <div className="sidebar-dropdown">
+                        <button
+                            className="sidebar-link sidebar-dropdown-trigger"
+                            onClick={() => toggleDropdown('skin')}
+                        >
+                            Skin Treatments
+                            <ChevronDown className={`dropdown-icon ${activeDropdown === 'skin' ? 'rotated' : ''}`} size={18} />
+                        </button>
+                        <div className={`sidebar-dropdown-menu ${activeDropdown === 'skin' ? 'open' : ''}`}>
+                            <Link to="/skin-treatments" className="sidebar-dropdown-item" onClick={() => setIsMobileMenuOpen(false)}>All Skin Treatments</Link>
+                            {skinTreatments.map((item) => (
+                                <Link key={item.path} to={item.path} className="sidebar-dropdown-item" onClick={() => setIsMobileMenuOpen(false)}>
+                                    {item.name}
+                                </Link>
+                            ))}
+                        </div>
                     </div>
-                </div>
 
-                <Link to="/technology" className="mobile-nav-link">Technology</Link>
-                <Link to="/blogs" className="mobile-nav-link">Blogs</Link>
-                <Link to="/about" className="mobile-nav-link">About Us</Link>
-                <Link to="/contact" className="mobile-nav-link">Contact</Link>
+                    <div className="sidebar-dropdown">
+                        <button
+                            className="sidebar-link sidebar-dropdown-trigger"
+                            onClick={() => toggleDropdown('hair')}
+                        >
+                            Hair Treatments
+                            <ChevronDown className={`dropdown-icon ${activeDropdown === 'hair' ? 'rotated' : ''}`} size={18} />
+                        </button>
+                        <div className={`sidebar-dropdown-menu ${activeDropdown === 'hair' ? 'open' : ''}`}>
+                            <Link to="/hair-treatments" className="sidebar-dropdown-item" onClick={() => setIsMobileMenuOpen(false)}>All Hair Treatments</Link>
+                            {hairTreatments.map((item) => (
+                                <Link key={item.path} to={item.path} className="sidebar-dropdown-item" onClick={() => setIsMobileMenuOpen(false)}>
+                                    {item.name}
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
 
-                <button onClick={handleWhatsApp} className="mobile-cta">
+                    <Link to="/technology" className="sidebar-link" onClick={() => setIsMobileMenuOpen(false)}>Technology</Link>
+                    <Link to="/blogs" className="sidebar-link" onClick={() => setIsMobileMenuOpen(false)}>Blogs</Link>
+                    <Link to="/about" className="sidebar-link" onClick={() => setIsMobileMenuOpen(false)}>About Us</Link>
+                    <Link to="/contact" className="sidebar-link" onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>
+                </nav>
+
+                <button onClick={handleWhatsApp} className="sidebar-cta">
                     <Phone size={18} />
                     Book Appointment
                 </button>
