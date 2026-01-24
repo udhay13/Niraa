@@ -341,4 +341,19 @@
         justify-content: flex-start;
         flex-direction: row-reverse;
     }
+
+    /* Fix Content Padding on Mobile */
+    .article-content {
+        font-size: 1rem;
+        padding: 0 var(--space-4);
+        /* Add side padding */
+    }
+
+    .article-content ul,
+    .article-content ol {
+        margin-left: 1.25em;
+        /* Ensure bullets are inside */
+        padding-left: 1em;
+        /* Extra safe space */
+    }
 }

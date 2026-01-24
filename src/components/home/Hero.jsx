@@ -51,12 +51,16 @@ const heroSlidesData = [
     }
 ];
 
-// Add clone of first slide for infinite scroll effect
-const heroSlides = [...heroSlidesData, { ...heroSlidesData[0], id: 'clone-1' }];
+// Bidirectional Infinite Scroll: [Clone Last, ...Originals, Clone First]
+const heroSlides = [
+    { ...heroSlidesData[heroSlidesData.length - 1], id: 'clone-last' },
+    ...heroSlidesData,
+    { ...heroSlidesData[0], id: 'clone-first' }
+];
 
 const Hero = () => {
-    const [currentSlide, setCurrentSlide] = useState(0);
-    const [autoScrollDuration, setAutoScrollDuration] = useState(5000); // Default 5 seconds
+    // Start at index 1 (First Real Slide)
+    const [currentSlide, setCurrentSlide] = useState(1);
     const [isAutoScrollEnabled, setIsAutoScrollEnabled] = useState(true);
     const [isMobile, setIsMobile] = useState(false);
     const scrollContainerRef = useRef(null);
@@ -64,7 +68,20 @@ const Hero = () => {
     const startXRef = useRef(0);
     const scrollLeftRef = useRef(0);
     const autoScrollTimerRef = useRef(null);
-    const resetTimerRef = useRef(null);
+    const initializedRef = useRef(false);
+
+    // 1. Initial Setup: Jump to Index 1 immediately on mount
+    useEffect(() => {
+        const container = scrollContainerRef.current;
+        if (container && !initializedRef.current) {
+            // Wait for layout
+            setTimeout(() => {
+                const slideWidth = container.offsetWidth;
+                container.scrollLeft = slideWidth; // Jump to Slide 1
+                initializedRef.current = true;
+            }, 50);
+        }
+    }, [isMobile]); // Re-run if mobile breakpoint changes (layout shift)
 
     // Check for mobile device
     useEffect(() => {
@@ -82,52 +99,75 @@ const Hero = () => {
         if (!container) return;
 
         const handleScroll = () => {
+            if (!initializedRef.current) return;
+
             const scrollLeft = container.scrollLeft;
             const slideWidth = container.offsetWidth;
             const newIndex = Math.round(scrollLeft / slideWidth);
-            setCurrentSlide(newIndex);
+
+            // Only update if changed to avoid loop
+            if (newIndex !== currentSlide) {
+                setCurrentSlide(newIndex);
+            }
         };
 
         container.addEventListener('scroll', handleScroll);
         return () => container.removeEventListener('scroll', handleScroll);
-    }, []);
+    }, [currentSlide]);
 
-    // Auto-scroll functionality with Infinite Loop
+    // Infinite Loop Logic (Bidirectional)
     useEffect(() => {
-        if (!isAutoScrollEnabled || isMobile) return;
+        if (!initializedRef.current) return;
+
+        // If at Index 0 (Clone Last) -> Jump to Real Last (Length - 2)
+        if (currentSlide === 0) {
+            const timer = setTimeout(() => {
+                const container = scrollContainerRef.current;
+                if (container) {
+                    const slideWidth = container.offsetWidth;
+                    container.style.scrollBehavior = 'auto'; // Silent jump
+                    const realLastIndex = heroSlides.length - 2;
+                    container.scrollLeft = slideWidth * realLastIndex;
+                    setCurrentSlide(realLastIndex);
+
+                    // Force Reflow
+                    void container.offsetWidth;
+                    setTimeout(() => container.style.scrollBehavior = 'smooth', 50);
+                }
+            }, 500); // Wait for scroll animation to finish
+            return () => clearTimeout(timer);
+        }
+
+        // If at Index Length-1 (Clone First) -> Jump to Real First (1)
+        if (currentSlide === heroSlides.length - 1) {
+            const timer = setTimeout(() => {
+                const container = scrollContainerRef.current;
+                if (container) {
+                    const slideWidth = container.offsetWidth;
+                    container.style.scrollBehavior = 'auto'; // Silent jump
+                    const realFirstIndex = 1;
+                    container.scrollLeft = slideWidth * realFirstIndex;
+                    setCurrentSlide(realFirstIndex);
+
+                    // Force Reflow
+                    void container.offsetWidth;
+                    setTimeout(() => container.style.scrollBehavior = 'smooth', 50);
+                }
+            }, 500);
+            return () => clearTimeout(timer);
+        }
+    }, [currentSlide]);
+
+    // Auto-scroll functionality
+    useEffect(() => {
+        if (!isAutoScrollEnabled) return;
 
         const startAutoScroll = () => {
             autoScrollTimerRef.current = setInterval(() => {
                 setCurrentSlide((prev) => {
                     const nextIndex = prev + 1;
-
-                    // If we are moving to the clone (last item)
-                    if (nextIndex === heroSlides.length - 1) {
-                        scrollToSlide(nextIndex);
-
-                        // Wait for animation to finish then silent reset
-                        resetTimerRef.current = setTimeout(() => {
-                            const container = scrollContainerRef.current;
-                            if (container) {
-                                container.style.scrollBehavior = 'auto'; // Disable smooth scroll
-                                container.scrollLeft = 0; // Jump to start
-                                setCurrentSlide(0);
-                                setTimeout(() => { // Re-enable smooth scroll
-                                    container.style.scrollBehavior = 'smooth';
-                                }, 50);
-                            }
-                        }, 600); // 600ms matches smooth scroll duration roughly
-
-                        return nextIndex;
-                    }
-
-                    // Normal transition
-                    if (nextIndex < heroSlides.length - 1) {
-                        scrollToSlide(nextIndex);
-                        return nextIndex;
-                    }
-
-                    return 0; // Fallback
+                    scrollToSlide(nextIndex);
+                    return nextIndex;
                 });
             }, 5000); // 5 seconds
         };
@@ -136,35 +176,28 @@ const Hero = () => {
 
         return () => {
             if (autoScrollTimerRef.current) clearInterval(autoScrollTimerRef.current);
-            if (resetTimerRef.current) clearTimeout(resetTimerRef.current);
         };
-    }, [isAutoScrollEnabled, isMobile]);
+    }, [isAutoScrollEnabled, isMobile]); // Removed isMobile check to allow mobile auto-scroll
 
-    // Desktop drag-to-scroll functionality
+    // Desktop/Mobile Touch Drag Logic
     useEffect(() => {
         const container = scrollContainerRef.current;
         if (!container) return;
 
         const handleMouseDown = (e) => {
-            // Don't start drag if clicking on a button or link
             if (e.target.closest('button, a')) return;
-
-            // Pause auto-scroll when user starts dragging
-            setIsAutoScrollEnabled(false);
-
+            setIsAutoScrollEnabled(false); // Pause auto-scroll
             isDraggingRef.current = true;
             startXRef.current = e.pageX - container.offsetLeft;
             scrollLeftRef.current = container.scrollLeft;
             container.style.cursor = 'grabbing';
-            container.style.userSelect = 'none';
         };
 
         const handleMouseMove = (e) => {
             if (!isDraggingRef.current) return;
             e.preventDefault();
-
             const x = e.pageX - container.offsetLeft;
-            const walk = (x - startXRef.current) * 2; // Multiply for faster scroll
+            const walk = (x - startXRef.current) * 2;
             container.scrollLeft = scrollLeftRef.current - walk;
         };
 
@@ -172,24 +205,14 @@ const Hero = () => {
             if (!isDraggingRef.current) return;
             isDraggingRef.current = false;
             container.style.cursor = 'grab';
-            container.style.userSelect = '';
-
-            // Resume auto-scroll after a delay if not mobile
-            if (!isMobile) {
-                setTimeout(() => setIsAutoScrollEnabled(true), 3000);
-            }
+            setTimeout(() => setIsAutoScrollEnabled(true), 3000); // Resume
         };
 
         const handleMouseLeave = () => {
             if (!isDraggingRef.current) return;
             isDraggingRef.current = false;
             container.style.cursor = 'grab';
-            container.style.userSelect = '';
-
-            // Resume auto-scroll after a delay if not mobile
-            if (!isMobile) {
-                setTimeout(() => setIsAutoScrollEnabled(true), 3000);
-            }
+            setTimeout(() => setIsAutoScrollEnabled(true), 3000);
         };
 
         container.addEventListener('mousedown', handleMouseDown);
@@ -208,7 +231,6 @@ const Hero = () => {
     const scrollToSlide = (index) => {
         const container = scrollContainerRef.current;
         if (!container) return;
-
         const slideWidth = container.offsetWidth;
         container.scrollTo({
             left: slideWidth * index,
@@ -216,59 +238,38 @@ const Hero = () => {
         });
     };
 
-
-
-    const goToNext = () => {
-        const nextSlide = (currentSlide + 1) % heroSlides.length;
-        setCurrentSlide(nextSlide);
-        scrollToSlide(nextSlide);
-
-        // Pause and resume auto-scroll
+    const handleBlockClick = (index) => {
+        // Map 0-based index (0..3) to real slides (1..4)
+        const realIndex = index + 1;
+        setCurrentSlide(realIndex);
+        scrollToSlide(realIndex);
         setIsAutoScrollEnabled(false);
-        setTimeout(() => setIsAutoScrollEnabled(true), 3000);
+        setTimeout(() => setIsAutoScrollEnabled(true), 100);
     };
-
-    const goToPrev = () => {
-        const prevSlide = currentSlide === 0 ? heroSlides.length - 1 : currentSlide - 1;
-        setCurrentSlide(prevSlide);
-        scrollToSlide(prevSlide);
-
-        // Pause and resume auto-scroll
-        setIsAutoScrollEnabled(false);
-        setTimeout(() => setIsAutoScrollEnabled(true), 3000);
-    };
-
-
 
     const handleWhatsApp = () => {
         const message = encodeURIComponent('Hello! I would like to book a consultation at Niraa Aesthetics.');
         window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
     };
 
-    const handleBlockClick = (index) => {
-        setCurrentSlide(index);
-        scrollToSlide(index);
-
-        // Reset auto scroll timer to restart interaction
-        setIsAutoScrollEnabled(false);
-        setTimeout(() => setIsAutoScrollEnabled(true), 100);
-    };
+    // Calculate active indicator index (0-3)
+    // currentSlide ranges from 0 (Clone L) to 5 (Clone F)
+    // Real slides are 1, 2, 3, 4 -> Indices 0, 1, 2, 3
+    let activeIndicatorIndex = 0;
+    if (currentSlide === 0) activeIndicatorIndex = heroSlidesData.length - 1;
+    else if (currentSlide === heroSlides.length - 1) activeIndicatorIndex = 0;
+    else activeIndicatorIndex = currentSlide - 1;
 
     return (
         <section className="hero-carousel">
-            {/* Horizontal Scroll Container */}
-            <div
-                className="hero-scroll-container"
-                ref={scrollContainerRef}
-            >
+            <div className="hero-scroll-container" ref={scrollContainerRef}>
                 {heroSlides.map((slide, index) => (
                     <div
-                        key={slide.id}
+                        key={`${slide.id}-${index}`}
                         className="hero-slide"
                         style={{ backgroundImage: `url(${slide.image})` }}
                     >
                         <div className="slide-overlay"></div>
-
                         <div className="container slide-content">
                             <div className="slide-text">
                                 <span className="slide-badge">
@@ -278,29 +279,22 @@ const Hero = () => {
                                 <h1 className="slide-title">{slide.title}</h1>
                                 <p className="slide-subtitle">{slide.subtitle}</p>
                                 <p className="slide-description">{slide.description}</p>
-
                                 <div className="slide-cta">
                                     <button
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            handleWhatsApp();
-                                        }}
+                                        onClick={(e) => { e.stopPropagation(); handleWhatsApp(); }}
                                         className="btn btn-primary btn-lg"
                                     >
-                                        <Phone size={18} />
-                                        Book Consultation
+                                        <Phone size={18} /> Book Consultation
                                     </button>
                                     <Link
                                         to={slide.link}
                                         className="btn btn-outline-light btn-lg"
                                         onClick={(e) => e.stopPropagation()}
                                     >
-                                        {slide.cta}
-                                        <ArrowRight size={18} />
+                                        {slide.cta} <ArrowRight size={18} />
                                     </Link>
                                 </div>
                             </div>
-
                             <div className="slide-treatments">
                                 {slide.treatments.map((treatment, i) => (
                                     <div key={i} className="treatment-badge" style={{ '--delay': `${i * 0.1}s` }}>
@@ -314,13 +308,12 @@ const Hero = () => {
                 ))}
             </div>
 
-            {/* Progress Blocks (Replacing Indicators & Toggle) */}
             <div className="hero-controls">
                 <div className="progress-blocks-container">
                     {heroSlidesData.map((_, index) => (
                         <div
                             key={index}
-                            className={`progress-block ${index === (currentSlide % heroSlidesData.length) ? 'active' : ''} ${index === (currentSlide % heroSlidesData.length) && isAutoScrollEnabled && !isMobile ? 'animating' : ''}`}
+                            className={`progress-block ${index === activeIndicatorIndex ? 'active' : ''} ${index === activeIndicatorIndex && isAutoScrollEnabled ? 'animating' : ''}`}
                             onClick={(e) => { e.stopPropagation(); handleBlockClick(index); }}
                         >
                             <div className="progress-fill"></div>
@@ -329,13 +322,11 @@ const Hero = () => {
                 </div>
             </div>
 
-            {/* Bottom Contact Bar */}
             <div className="hero-contact-bar">
                 <div className="container contact-bar-content">
                     <span className="contact-label">Talk to our experts</span>
                     <a href="tel:+919876543210" className="contact-phone">
-                        <Phone size={16} />
-                        +91 98765 43210
+                        <Phone size={16} /> +91 98765 43210
                     </a>
                     <span className="contact-divider">|</span>
                     <span className="contact-trust">⭐ Rated 4.9/5 by 10,000+ clients</span>

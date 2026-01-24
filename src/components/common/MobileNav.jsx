@@ -53,10 +53,7 @@ const MobileNav = () => {
                         key={item.path}
                         to={item.path}
                         className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}
-                        onClick={(e) => {
-                            e.preventDefault();
-                            handleNavClick(item.path);
-                        }}
+                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                     >
                         {({ isActive }) => (
                             <>
