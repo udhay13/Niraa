@@ -1,0 +1,12 @@
+/* Layout Styles */
+
+.main-content {
+    flex: 1;
+}
+
+/* Add bottom padding only on mobile for the fixed bottom nav */
+@media (max-width: 768px) {
+    .main-content {
+        padding-bottom: 80px;
+    }
+}

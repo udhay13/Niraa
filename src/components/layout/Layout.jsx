@@ -2,16 +2,19 @@ import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import WhatsAppFloat from '../common/WhatsAppFloat';
+import MobileNav from '../common/MobileNav';
+import './Layout.css';
 
 const Layout = () => {
     return (
         <>
             <Header />
-            <main style={{ flex: 1 }}>
+            <main className="main-content">
                 <Outlet />
             </main>
             <Footer />
             <WhatsAppFloat />
+            <MobileNav />
         </>
     );
 };
