@@ -1,4 +1,4 @@
-/* Mobile Bottom Navigation - Myntra Style */
+/* Mobile Bottom Navigation - Modern Floating */
 
 .mobile-bottom-nav {
     display: none;
@@ -6,15 +6,18 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: #ffffff;
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
-    padding: 6px 0;
-    padding-bottom: max(6px, env(safe-area-inset-bottom));
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(0, 0, 0, 0.04);
+    padding: 12px 0;
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
     z-index: 1000;
     justify-content: space-around;
     align-items: center;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.08);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    height: auto;
 }
 
 .mobile-bottom-nav.visible {
@@ -29,8 +32,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2px;
-    padding: 4px 8px;
+    gap: 4px;
+    padding: 6px 12px;
     color: #666;
     text-decoration: none;
     font-size: 10px;
@@ -38,8 +41,9 @@
     border: none;
     background: none;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
+    border-radius: 12px;
 }
 
 .nav-icon-wrapper {
@@ -49,14 +53,14 @@
     justify-content: center;
     width: 28px;
     height: 28px;
-    transition: all 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .nav-label {
     font-size: 10px;
     font-weight: 500;
-    letter-spacing: 0.02em;
-    transition: color 0.2s ease;
+    letter-spacing: 0.01em;
+    transition: all 0.3s ease;
 }
 
 .mobile-nav-item.active {
@@ -64,28 +68,34 @@
 }
 
 .mobile-nav-item.active .nav-icon-wrapper {
-    transform: scale(1.1);
+    transform: translateY(-2px) scale(1.1);
 }
 
 .mobile-nav-item.active .nav-label {
     font-weight: 600;
 }
 
+.mobile-nav-item:active .nav-icon-wrapper {
+    transform: scale(0.9);
+}
+
 .active-dot {
     position: absolute;
-    bottom: -4px;
+    bottom: -6px;
     left: 50%;
     transform: translateX(-50%);
     width: 4px;
     height: 4px;
     background: #d4af37;
     border-radius: 50%;
-    animation: dotPop 0.3s ease;
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+    animation: dotPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 @keyframes dotPop {
     0% {
         transform: translateX(-50%) scale(0);
+        opacity: 0;
     }
 
     50% {
@@ -94,10 +104,11 @@
 
     100% {
         transform: translateX(-50%) scale(1);
+        opacity: 1;
     }
 }
 
-/* Book CTA */
+/* Book CTA - Enhanced */
 .mobile-nav-cta {
     color: #d4af37;
 }
@@ -105,13 +116,15 @@
 .mobile-nav-cta .cta-icon {
     background: linear-gradient(135deg, #d4af37 0%, #f5d77a 100%);
     color: #fff;
-    border-radius: 8px;
+    border-radius: 10px;
     width: 32px;
-    height: 26px;
+    height: 28px;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.mobile-nav-cta:hover .cta-icon {
-    transform: scale(1.05);
+.mobile-nav-cta:active .cta-icon {
+    transform: scale(0.95);
     box-shadow: 0 2px 8px rgba(212, 175, 55, 0.4);
 }
 

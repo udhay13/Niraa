@@ -175,21 +175,100 @@
 }
 
 @media (max-width: 768px) {
+    .treatments-section {
+        padding: var(--space-12) 0;
+        background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
+    }
+
+    .section-header {
+        padding: 0 var(--space-4);
+        margin-bottom: var(--space-8);
+    }
+
+    .section-header h2 {
+        font-size: var(--text-2xl);
+    }
+
+    /* Pill-Style Tabs - Horizontal Scroll */
     .treatment-tabs {
-        flex-direction: column;
-        width: 100%;
-        max-width: 280px;
-        border-radius: var(--radius-xl);
+        flex-direction: row;
+        width: auto;
+        max-width: none;
+        border-radius: var(--radius-full);
+        padding: var(--space-1);
+        margin: 0 var(--space-4) var(--space-8);
+        overflow-x: auto;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .treatment-tabs::-webkit-scrollbar {
+        display: none;
     }
 
     .tab-btn {
-        width: 100%;
-        border-radius: var(--radius-lg);
+        white-space: nowrap;
+        padding: var(--space-2) var(--space-6);
+        border-radius: var(--radius-full);
+        font-size: var(--text-sm);
     }
 
+    /* Horizontal Scroll Grid */
     .treatments-grid {
-        grid-template-columns: 1fr;
-        max-width: 400px;
-        margin: 0 auto;
+        display: flex;
+        grid-template-columns: none;
+        gap: var(--space-4);
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding: 0 var(--space-4);
+        padding-bottom: var(--space-2);
+    }
+
+    .treatments-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Modern Card Design */
+    .treatment-card {
+        flex: 0 0 300px;
+        scroll-snap-align: start;
+        border-radius: var(--radius-3xl);
+        overflow: hidden;
+        background: var(--color-white);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        border: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .treatment-card:active {
+        transform: scale(0.98);
+    }
+
+    /* Larger Images */
+    .treatment-image {
+        height: 200px;
+        position: relative;
+    }
+
+    .treatment-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .treatment-content {
+        padding: var(--space-5);
+    }
+
+    .treatment-content h3 {
+        font-size: var(--text-lg);
+        margin-bottom: var(--space-2);
+    }
+
+    .treatment-content p {
+        font-size: var(--text-sm);
+        line-height: 1.6;
     }
 }

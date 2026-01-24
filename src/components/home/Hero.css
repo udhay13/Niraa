@@ -101,125 +101,108 @@
     animation: fadeInUp 0.6s ease-out 0.3s both;
 }
 
+/* CTA Buttons */
 .slide-cta {
     display: flex;
     gap: var(--space-4);
     animation: fadeInUp 0.6s ease-out 0.4s both;
 }
 
-.btn-outline-light {
-    background: transparent;
-    border: 2px solid rgba(255, 255, 255, 0.5);
+.slide-cta .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-4) var(--space-6);
+    font-size: var(--text-base);
+    font-weight: var(--font-semibold);
+    border-radius: var(--radius-full);
+    transition: all var(--transition-normal);
+}
+
+.slide-cta .btn-primary {
+    background: linear-gradient(135deg, #d4af37 0%, #f5d77a 100%);
+    color: #1a1a2e;
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+}
+
+.slide-cta .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 30px rgba(212, 175, 55, 0.6);
+}
+
+.slide-cta .btn-outline-light {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
     color: var(--color-white);
 }
 
-.btn-outline-light:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: #d4af37;
-    color: #d4af37;
+.slide-cta .btn-outline-light:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
 }
 
-/* Treatment Badges on Right Side */
+/* Treatment Badges */
 .slide-treatments {
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
-    align-items: flex-end;
+    gap: var(--space-3);
+    animation: fadeInRight 0.8s ease-out 0.5s both;
 }
 
 .treatment-badge {
     display: flex;
     align-items: center;
-    gap: var(--space-4);
-    padding: var(--space-4) var(--space-6);
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: var(--radius-xl);
-    transition: all 0.3s ease;
     animation: slideInRight 0.6s ease-out both;
-    animation-delay: var(--delay, 0s);
-}
-
-.treatment-badge:hover {
-    background: rgba(212, 175, 55, 0.2);
-    border-color: #d4af37;
-    transform: translateX(-8px);
+    animation-delay: var(--delay);
 }
 
 .treatment-number {
-    width: 36px;
-    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 32px;
+    height: 32px;
     background: linear-gradient(135deg, #d4af37 0%, #f5d77a 100%);
     color: #1a1a2e;
+    font-size: var(--text-sm);
     font-weight: var(--font-bold);
-    border-radius: var(--radius-lg);
+    border-radius: 50%;
 }
 
 .treatment-name {
+    color: var(--color-white);
     font-size: var(--text-base);
     font-weight: var(--font-medium);
-    color: var(--color-white);
-}
-
-/* Navigation Arrows */
-.nav-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: var(--radius-full);
-    color: var(--color-white);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 10;
-}
-
-.nav-arrow:hover {
-    background: #d4af37;
-    border-color: #d4af37;
-    color: #1a1a2e;
-}
-
-.nav-prev {
-    left: var(--space-4);
-}
-
-.nav-next {
-    right: var(--space-4);
 }
 
 /* Slide Indicators */
 .slide-indicators {
     position: absolute;
-    bottom: 100px;
+    bottom: var(--space-8);
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: var(--space-3);
-    z-index: 10;
+    gap: var(--space-2);
+    z-index: 3;
 }
 
 .indicator {
-    width: 60px;
+    position: relative;
+    width: 40px;
     height: 4px;
     background: rgba(255, 255, 255, 0.3);
     border: none;
     border-radius: var(--radius-full);
     cursor: pointer;
     overflow: hidden;
-    padding: 0;
-    transition: background 0.3s ease;
+    transition: all var(--transition-fast);
 }
 
 .indicator:hover {
@@ -227,30 +210,21 @@
 }
 
 .indicator.active {
-    background: rgba(255, 255, 255, 0.3);
-}
-
-.indicator.active .indicator-progress {
-    display: block;
-    width: 100%;
-    height: 100%;
-    background: #d4af37;
-    border-radius: var(--radius-full);
-    animation: progressBar 5s linear forwards;
+    background: rgba(255, 255, 255, 0.5);
 }
 
 .indicator-progress {
-    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #d4af37 0%, #f5d77a 100%);
+    width: 0;
+    transition: width 0.1s linear;
 }
 
-@keyframes progressBar {
-    from {
-        width: 0;
-    }
-
-    to {
-        width: 100%;
-    }
+.indicator.active .indicator-progress {
+    animation: progress 5s linear;
 }
 
 /* Bottom Contact Bar */
@@ -259,33 +233,34 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(10px);
+    background: rgba(26, 26, 46, 0.95);
+    backdrop-filter: blur(20px);
     padding: var(--space-4) 0;
-    z-index: 10;
+    z-index: 3;
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 .contact-bar-content {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: var(--space-6);
-    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-4);
 }
 
 .contact-label {
-    color: var(--color-white);
-    font-weight: var(--font-medium);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: var(--text-sm);
 }
 
 .contact-phone {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: var(--space-2);
     color: #d4af37;
-    font-weight: var(--font-bold);
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: all var(--transition-fast);
 }
 
 .contact-phone:hover {
@@ -297,7 +272,7 @@
 }
 
 .contact-trust {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.8);
     font-size: var(--text-sm);
 }
 
@@ -326,10 +301,10 @@
     }
 }
 
-@keyframes slideInRight {
+@keyframes fadeInRight {
     from {
         opacity: 0;
-        transform: translateX(40px);
+        transform: translateX(20px);
     }
 
     to {
@@ -338,68 +313,71 @@
     }
 }
 
-/* Responsive */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes progress {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+/* Tablet Responsive */
 @media (max-width: 1024px) {
     .slide-content {
         grid-template-columns: 1fr;
-        text-align: center;
-        padding-top: var(--space-24);
-        padding-left: var(--space-12);
-        padding-right: var(--space-12);
-    }
-
-    .slide-text {
-        order: 1;
-    }
-
-    .slide-description {
-        max-width: 100%;
-        margin: 0 auto var(--space-6);
-    }
-
-    .slide-cta {
-        justify-content: center;
+        padding-left: var(--space-8);
+        padding-right: var(--space-8);
     }
 
     .slide-treatments {
         display: none;
     }
-
-    .nav-arrow {
-        width: 40px;
-        height: 40px;
-    }
-
-    .nav-prev {
-        left: var(--space-3);
-    }
-
-    .nav-next {
-        right: var(--space-3);
-    }
 }
+
+/* ========================================
+   MOBILE REDESIGN - Modern Fluid Design
+   ======================================== */
 
 @media (max-width: 768px) {
 
-    /* Mobile Hero - Clean Modern Design */
+    /* Hero Container - Full Screen Immersive */
     .hero-carousel {
         position: relative;
         height: auto;
-        min-height: auto;
-        padding: 70px 12px 0 12px;
-        background: #f5f5f5;
-        overflow: visible;
+        min-height: calc(100vh - 54px);
+        padding: 54px 0 0 0;
+        background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1e 100%);
+        overflow: hidden;
+        margin-top: 0;
     }
 
+    /* Slides Container - Edge to Edge */
     .slides-container {
         position: relative;
         width: 100%;
-        height: 360px;
-        border-radius: 20px;
+        margin: 0;
+        height: calc(100vh - 54px);
+        min-height: 600px;
+        border-radius: 0;
         overflow: hidden;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+        box-shadow: none;
     }
 
+    /* Individual Slides - Full Width */
     .hero-slide {
         position: absolute;
         top: 0;
@@ -408,142 +386,172 @@
         height: 100%;
         background-size: cover;
         background-position: center;
-        border-radius: 20px;
+        border-radius: 0;
     }
 
+    /* Gradient Overlay - Sophisticated Multi-Stop */
     .slide-overlay {
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
+        inset: 0;
         background: linear-gradient(to bottom,
-                transparent 0%,
-                rgba(0, 0, 0, 0.2) 50%,
-                rgba(0, 0, 0, 0.8) 100%);
-        border-radius: 20px;
+                rgba(26, 26, 46, 0.3) 0%,
+                rgba(26, 26, 46, 0.4) 20%,
+                rgba(26, 26, 46, 0.6) 50%,
+                rgba(26, 26, 46, 0.85) 80%,
+                rgba(26, 26, 46, 0.95) 100%);
+        border-radius: 0;
     }
 
+    /* Content Layout - Floating with Glassmorphism */
     .slide-content {
         position: absolute;
-        bottom: 0;
+        bottom: 80px;
         left: 0;
         right: 0;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        align-items: center;
-        padding: 16px 16px 80px;
-        text-align: center;
+        align-items: stretch;
+        padding: 0 20px 32px 20px;
+        text-align: left;
         height: auto;
         grid-template-columns: 1fr;
     }
 
     .slide-text {
         width: 100%;
-    }
-
-    .slide-badge {
-        font-size: 10px;
-        padding: 5px 12px;
-        margin-bottom: 10px;
-        display: inline-flex;
-    }
-
-    .slide-title {
-        font-size: 24px;
-        font-weight: 700;
-        margin-bottom: 6px;
-        line-height: 1.2;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    }
-
-    .slide-subtitle {
-        font-size: 14px;
         margin-bottom: 0;
-        opacity: 0.9;
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 24px;
+        padding: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
+    /* Badge - Modern Pill */
+    .slide-badge {
+        font-size: 11px;
+        padding: 8px 16px;
+        margin-bottom: 16px;
+        display: inline-flex;
+        align-self: flex-start;
+        background: linear-gradient(135deg, rgba(212, 175, 55, 0.9) 0%, rgba(245, 215, 122, 0.9) 100%);
+        box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+    }
+
+    /* Title - Large and Elegant */
+    .slide-title {
+        font-size: 32px;
+        font-weight: 800;
+        margin-bottom: 12px;
+        line-height: 1.15;
+        text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+        letter-spacing: -0.02em;
+    }
+
+    /* Subtitle - Prominent */
+    .slide-subtitle {
+        font-size: 18px;
+        margin-bottom: 0;
+        opacity: 1;
+        text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+        font-weight: 500;
+    }
+
+    /* Hide Description */
     .slide-description {
         display: none;
     }
 
+    /* Hide Treatment Badges */
     .slide-treatments {
         display: none;
     }
 
+    /* CTA Buttons - Modern Fluid */
     .slide-cta {
         display: flex;
         flex-direction: row;
-        justify-content: center;
-        gap: 6px;
-        margin-top: 8px;
+        gap: 12px;
+        margin-top: 24px;
         width: 100%;
     }
 
     .slide-cta .btn {
-        display: inline-flex;
+        display: flex;
         align-items: center;
         justify-content: center;
-        gap: 2px;
-        padding: 5px 10px;
-        font-size: 10px;
-        font-weight: 500;
-        border-radius: 12px;
-        width: auto;
-        letter-spacing: 0.01em;
+        gap: 8px;
+        padding: 16px 24px;
+        font-size: 15px;
+        font-weight: 600;
+        border-radius: 16px;
+        flex: 1;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .slide-cta .btn-primary {
         background: linear-gradient(135deg, #d4af37 0%, #f5d77a 100%);
         color: #1a1a2e;
-        box-shadow: 0 2px 6px rgba(212, 175, 55, 0.25);
+        box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+    }
+
+    .slide-cta .btn-primary:active {
+        transform: scale(0.98);
     }
 
     .slide-cta .btn-outline-light {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(4px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.25);
         color: #fff;
-        padding: 4px 8px;
     }
 
-    /* Indicators below the slider */
+    .slide-cta .btn-outline-light:active {
+        background: rgba(255, 255, 255, 0.18);
+    }
+
+    /* Indicators - Integrated Overlay */
     .slide-indicators {
-        position: relative;
-        bottom: auto;
-        left: auto;
-        transform: none;
+        position: absolute;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
         display: flex;
         justify-content: center;
         gap: 6px;
-        padding: 14px 0;
-        background: #f5f5f5;
+        padding: 10px 16px;
+        background: rgba(26, 26, 46, 0.6);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 10;
     }
 
     .indicator {
-        width: 8px;
-        height: 8px;
+        width: 6px;
+        height: 6px;
         border-radius: 50%;
-        background: #ddd;
+        background: rgba(255, 255, 255, 0.4);
         border: none;
         padding: 0;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .indicator.active {
         background: #d4af37;
-        width: 24px;
-        border-radius: 12px;
+        width: 28px;
+        border-radius: 10px;
+        box-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
     }
 
     .indicator-progress {
         display: none;
     }
 
-    /* Hide contact bar on mobile */
+    /* Hide Contact Bar on Mobile */
     .hero-contact-bar {
         display: none;
     }
