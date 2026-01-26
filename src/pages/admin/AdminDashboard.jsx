@@ -111,23 +111,28 @@ const AdminDashboard = () => {
         }));
     };
 
-    const handleSave = (e) => {
+    const handleSave = async (e) => {
         e.preventDefault();
 
-        const blogData = {
-            ...formData,
-            tags: formData.tags.split(',').map(tag => tag.trim()).filter(tag => tag),
-            author: 'Dr. Paavai Team'
-        };
+        try {
+            const blogData = {
+                ...formData,
+                tags: formData.tags.split(',').map(tag => tag.trim()).filter(tag => tag),
+                author: 'Dr. Paavai Team'
+            };
 
-        if (editingBlog) {
-            updateBlog(editingBlog.id, blogData);
-        } else {
-            addBlog(blogData);
+            if (editingBlog) {
+                await updateBlog(editingBlog.id, blogData);
+            } else {
+                await addBlog(blogData);
+            }
+
+            setShowEditor(false);
+            setEditingBlog(null);
+        } catch (error) {
+            console.error("Failed to save blog:", error);
+            alert("Failed to save blog post: " + error.message);
         }
-
-        setShowEditor(false);
-        setEditingBlog(null);
     };
 
     if (!isAdmin) {
