@@ -177,15 +177,15 @@ const About = () => {
                 <div className="container">
                     <div className="stats-grid">
                         <div className="stat-item">
-                            <span className="stat-number">10K+</span>
+                            <span className="stat-number">2k+</span>
                             <span className="stat-label">Happy Clients</span>
                         </div>
                         <div className="stat-item">
-                            <span className="stat-number">15+</span>
+                            <span className="stat-number">20+</span>
                             <span className="stat-label">Treatments</span>
                         </div>
                         <div className="stat-item">
-                            <span className="stat-number">5+</span>
+                            <span className="stat-number">6+</span>
                             <span className="stat-label">Years Experience</span>
                         </div>
                         <div className="stat-item">
