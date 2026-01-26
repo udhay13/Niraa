@@ -583,8 +583,10 @@
         height: auto;
         max-height: none;
         padding: var(--space-4) !important;
-        padding-bottom: 100px !important;
-        /* Ensure content isn't cut off at bottom */
+        padding-bottom: 120px !important;
+        /* Increased padding */
+        z-index: 5;
+        /* Ensure above backdrop */
     }
 
     .editor-modal {
@@ -597,10 +599,23 @@
         position: sticky;
         top: 0;
         background: var(--color-white);
-        z-index: 10;
+        z-index: 20;
+        /* Increased z-index */
         padding-bottom: var(--space-4);
         border-bottom: 1px solid var(--color-border-light);
         margin-bottom: var(--space-6);
+    }
+
+    .close-btn {
+        padding: 8px;
+        /* Larger touch target */
+        margin: -8px;
+    }
+
+    .editor-actions {
+        position: relative;
+        z-index: 10;
+        padding-bottom: var(--space-4);
     }
 }
 
