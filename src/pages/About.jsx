@@ -62,7 +62,7 @@ const About = () => {
                         <div className="value-card">
                             <div className="value-image">
                                 <img
-                                    src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&q=80"
+                                    src="https://www.rafflesmedicalgroup.com/wp-content/uploads/2022/06/rmg-service-excellence-centre.jpg"
                                     alt="Excellence in Healthcare"
                                 />
                             </div>
@@ -75,7 +75,7 @@ const About = () => {
                         <div className="value-card">
                             <div className="value-image">
                                 <img
-                                    src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&q=80"
+                                    src="https://www.practicenursing.com/media/jocb15yz/compassionate_care_1000x667.jpg?width=960&height=540&format=webp&quality=80&bgcolor=White&v=1d8fa76c8127f50"
                                     alt="Compassionate Care"
                                 />
                             </div>
@@ -88,7 +88,7 @@ const About = () => {
                         <div className="value-card">
                             <div className="value-image">
                                 <img
-                                    src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&q=80"
+                                    src="https://fpimages.withfloats.com/actual/6888681c315ca9274f89b00c.jpg"
                                     alt="Trusted Healthcare"
                                 />
                             </div>
@@ -101,7 +101,7 @@ const About = () => {
                         <div className="value-card">
                             <div className="value-image">
                                 <img
-                                    src="https://images.unsplash.com/photo-1530497610245-94d3c16cda28?w=400&q=80"
+                                    src="https://img.gcimagazine.com/files/base/allured/all/image/2025/01/Head_Banner_Pic.677c19bd73e8d.png?auto=format%2Ccompress&dpr=2&q=70&w=700"
                                     alt="Medical Innovation"
                                 />
                             </div>
