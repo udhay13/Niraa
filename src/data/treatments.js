@@ -490,7 +490,7 @@ export const hairTreatments = [
         title: 'Oxygen Laser Therapy',
         shortDescription: 'Synergistic combination of laser energy and oxygen infusion for scalp health.',
         description: 'A dual-action treatment combining nourishing oxygen infusion with bio-stimulating low-level laser energy to detoxify the scalp, reduce inflammation, and accelerate hair growth.',
-        image: 'https://plus.unsplash.com/premium_photo-1682089810582-f7b200217b67?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        image: 'https://hair4me.com/wp-content/uploads/2025/02/laser-hair-therapy-jacksonville-fl.jpg',
         duration: '30-45 mins',
         sessions: '8-12 sessions',
         recovery: 'None',
