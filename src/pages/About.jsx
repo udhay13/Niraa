@@ -46,7 +46,7 @@ const About = () => {
                         </div>
                         <div className="story-image">
                             <img
-                                src="https://i.ibb.co/Pzh9LvTt/Design.png"
+                                src="https://iili.io/fPw1iHF.png"
                                 alt="Niraa Aesthetics Clinic - Modern Dermatology"
                             />
                         </div>
