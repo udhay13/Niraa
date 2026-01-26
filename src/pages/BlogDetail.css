@@ -6,7 +6,7 @@
 
 /* Hero Section */
 .blog-detail-hero {
-    padding: var(--space-20) 0 var(--space-12);
+    padding: 140px 0 var(--space-12);
     background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
     color: var(--color-white);
     position: relative;

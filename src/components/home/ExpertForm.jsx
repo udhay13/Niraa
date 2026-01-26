@@ -1,26 +1,16 @@
 import { useState } from 'react';
-import { Phone, User, MapPin, CheckCircle } from 'lucide-react';
+import { Phone, User, CheckCircle, Stethoscope } from 'lucide-react';
 import './ExpertForm.css';
 
 const ExpertForm = () => {
     const [formData, setFormData] = useState({
         name: '',
         mobile: '',
-        city: '',
+        gender: '',
+        treatment: '',
         consent: false
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
-
-    const cities = [
-        'Bangalore',
-        'Mumbai',
-        'Delhi',
-        'Chennai',
-        'Hyderabad',
-        'Pune',
-        'Kolkata',
-        'Other'
-    ];
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -44,7 +34,8 @@ const ExpertForm = () => {
             `Hello! I would like to book an appointment at Niraa Aesthetics.\n\n` +
             `Name: ${formData.name}\n` +
             `Mobile: ${formData.mobile}\n` +
-            `City: ${formData.city}`
+            `Gender: ${formData.gender}\n` +
+            `Treatment: ${formData.treatment}`
         );
 
         // Short delay for UX
@@ -116,19 +107,34 @@ const ExpertForm = () => {
 
                         <div className="form-group">
                             <div className="input-wrapper">
-                                <MapPin className="input-icon" size={20} />
+                                <User className="input-icon" size={20} />
                                 <select
-                                    name="city"
-                                    value={formData.city}
+                                    name="gender"
+                                    value={formData.gender}
                                     onChange={handleChange}
                                     className="form-input form-select"
                                     required
                                 >
-                                    <option value="">Select Your City</option>
-                                    {cities.map(city => (
-                                        <option key={city} value={city}>{city}</option>
-                                    ))}
+                                    <option value="">Select Gender</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Other">Other</option>
                                 </select>
+                            </div>
+                        </div>
+
+                        <div className="form-group">
+                            <div className="input-wrapper">
+                                <Stethoscope className="input-icon" size={20} />
+                                <input
+                                    type="text"
+                                    name="treatment"
+                                    placeholder="What kind of treatment do you want?"
+                                    value={formData.treatment}
+                                    onChange={handleChange}
+                                    className="form-input"
+                                    required
+                                />
                             </div>
                         </div>
 

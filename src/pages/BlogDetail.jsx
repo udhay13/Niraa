@@ -87,7 +87,7 @@ const BlogDetail = () => {
                     <div className="blog-meta">
                         <div className="meta-item">
                             <User size={16} />
-                            <span>{blog.author}</span>
+                            <span>{(blog.author && (blog.author.includes('Nira') || blog.author.includes('Niraa'))) ? 'Dr. Paavai Team' : blog.author}</span>
                         </div>
                         <div className="meta-item">
                             <Calendar size={16} />
@@ -119,7 +119,7 @@ const BlogDetail = () => {
                                 </p>
                             )}
                             <hr className="divider" />
-                            {renderContent(blog.content)}
+                            {renderContent(blog.content.replace(/Dr\.?\s*Niraa?\s*(Team)?/gi, 'Dr. Paavai Team'))}
                         </div>
 
                         {blog.tags && blog.tags.length > 0 && (

@@ -9,7 +9,7 @@
     background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
     position: relative;
     overflow: hidden;
-    padding: var(--space-20) 0;
+    padding: 140px 0 var(--space-20);
 }
 
 .blog-hero::before {

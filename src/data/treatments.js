@@ -35,7 +35,7 @@ export const skinTreatments = [
         title: 'Skin Rejuvenation',
         shortDescription: 'Restore youthful vitality by addressing sun damage, dullness, and uneven texture.',
         description: 'Restoration of youthful vitality by addressing sun damage, dullness, and uneven texture through various procedures like lasers, microneedling, and chemical peels for radiant, refreshed skin.',
-        image: 'https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=800&q=80',
+        image: 'https://plus.unsplash.com/premium_photo-1664299126758-22b348235307?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         duration: '45-60 mins',
         sessions: '4-8 sessions',
         recovery: '24-48 hours',
@@ -60,42 +60,13 @@ export const skinTreatments = [
             { question: 'Are results permanent?', answer: 'Results are long-lasting with proper skincare and maintenance sessions.' }
         ]
     },
-    {
-        id: 'laser-hair-removal',
-        title: 'Laser Hair Removal',
-        shortDescription: 'Safe, long-term solution for reducing unwanted hair using concentrated light energy.',
-        description: 'A safe, long-term solution for reducing unwanted hair using concentrated light energy to disable hair follicles, providing smooth, hair-free skin with minimal discomfort.',
-        image: 'https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=800&q=80',
-        duration: '15-60 mins',
-        sessions: '6-8 sessions',
-        recovery: 'None',
-        benefits: [
-            'Permanent hair reduction',
-            'Safe for all skin types',
-            'Fast treatment sessions',
-            'Minimal discomfort with cooling',
-            'No ingrown hairs or razor bumps'
-        ],
-        procedure: [
-            { step: 1, title: 'Consultation', description: 'Skin and hair type analysis, patch test' },
-            { step: 2, title: 'Preparation', description: 'Treatment area shaving and cooling gel' },
-            { step: 3, title: 'Laser Application', description: 'Precise laser targeting of hair follicles' },
-            { step: 4, title: 'Soothing', description: 'Cooling lotion application' },
-            { step: 5, title: 'Aftercare', description: 'Sun protection and care instructions' }
-        ],
-        technology: 'Diode Laser, Nd:YAG Laser, Cooling Technology',
-        faqs: [
-            { question: 'How many sessions for permanent results?', answer: '6-8 sessions spaced 4-6 weeks apart provide 80-90% permanent reduction.' },
-            { question: 'Is it painful?', answer: 'Our cooling technology makes treatment comfortable with minimal sensation.' },
-            { question: 'Can all areas be treated?', answer: 'Yes, we treat face, underarms, arms, legs, bikini, and full body.' }
-        ]
-    },
+
     {
         id: 'pigmentation-treatment',
         title: 'Pigmentation Treatment',
         shortDescription: 'Advanced therapies to lighten dark spots, melasma, and uneven skin tone.',
         description: 'Advanced therapies including creams, peels, and lasers designed to lighten dark spots, melasma, and uneven skin tone caused by excess melanin for clear, even-toned skin.',
-        image: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=800&q=80',
+        image: 'https://www.fmsskin.com/blog/wp-content/uploads/2024/11/Best-Pigmentation-Treatments-768x432.png',
         duration: '30-45 mins',
         sessions: '4-6 sessions',
         recovery: 'Minimal',
@@ -125,7 +96,7 @@ export const skinTreatments = [
         title: 'Tattoo Removal',
         shortDescription: 'Medical-grade laser procedure to break down and eliminate unwanted tattoo ink.',
         description: 'Medical-grade laser procedure that breaks down and eliminates unwanted tattoo ink using advanced Q-switched and Picosecond lasers for effective, safe tattoo removal.',
-        image: 'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=800&q=80',
+        image: 'https://plus.unsplash.com/premium_photo-1724518561088-fcf506afaa97?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         duration: '15-30 mins',
         sessions: '6-12 sessions',
         recovery: '5-7 days',
@@ -155,7 +126,7 @@ export const skinTreatments = [
         title: 'Chemical Peel Treatment',
         shortDescription: 'Skin-resurfacing procedure revealing brighter, smoother skin beneath.',
         description: 'A skin-resurfacing procedure using specialized solutions to exfoliate dead skin cells and reveal brighter, smoother skin beneath, treating various skin concerns effectively.',
-        image: 'https://images.unsplash.com/photo-1519415510236-718bdfcd89c8?w=800&q=80',
+        image: 'https://couturedentist.com/storage/2022/12/Chemical-Peels-Types-Risks-and-Recovery.jpeg',
         duration: '30-45 mins',
         sessions: '3-6 sessions',
         recovery: '3-7 days',
@@ -185,7 +156,7 @@ export const skinTreatments = [
         title: 'Intralesional Therapy',
         shortDescription: 'Precision treatment with medication injections directly into skin lesions.',
         description: 'Precision treatment involving medication injections directly into skin lesions like keloids, alopecia patches, and cysts for targeted, faster results with minimal side effects.',
-        image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&q=80',
+        image: 'https://www.drpraneethclinic.com/wp-content/uploads/blog-intralesional-steroids-acne-02.jpg',
         duration: '15-30 mins',
         sessions: '3-6 sessions',
         recovery: 'Minimal',
@@ -215,7 +186,7 @@ export const skinTreatments = [
         title: 'Cryotherapy',
         shortDescription: 'Quick procedure using liquid nitrogen to freeze and remove skin growths.',
         description: 'A quick procedure using liquid nitrogen to freeze and remove unwanted skin growths like warts, skin tags, and benign age spots safely and effectively.',
-        image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80',
+        image: 'https://integrishealth.org/-/media/blog/19-jan-feb/woman-in-a-cryochamber.jpg?as=1&mh=405&mw=720&revision=aa19cf45-5660-4dac-88ae-2575fc834fae&hash=7E20B2FAAA6E742F63B9570D9E71080E',
         duration: '10-20 mins',
         sessions: '1-3 sessions',
         recovery: '1-2 weeks',
@@ -275,7 +246,7 @@ export const skinTreatments = [
         title: 'Acne Scar Surgery',
         shortDescription: 'Specialized surgical techniques to treat deep, structural skin damage from acne.',
         description: 'Specialized surgical techniques like subcision or punch excision to treat deep, structural skin damage and scars left by severe acne for smoother, clearer skin.',
-        image: 'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=800&q=80',
+        image: 'https://celebritysecrets.in/wp-content/uploads/2023/05/acne-scar-treatment.jpg',
         duration: '30-60 mins',
         sessions: '1-3 sessions',
         recovery: '5-7 days',
@@ -305,7 +276,7 @@ export const skinTreatments = [
         title: 'Nail Surgery',
         shortDescription: 'Surgical solutions for functional and aesthetic nail disorders.',
         description: 'Surgical solutions for functional and aesthetic nail disorders, including ingrown toenails, chronic infections, and nail deformities for pain relief and restored appearance.',
-        image: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=800&q=80',
+        image: 'https://www.dermaqure.in/wp-content/uploads/2024/09/toenails-health-1536x1024.jpg',
         duration: '30-45 mins',
         sessions: '1 session',
         recovery: '2-4 weeks',
@@ -335,7 +306,7 @@ export const skinTreatments = [
         title: 'Earlobe Repair',
         shortDescription: 'Precise surgical procedure to correct torn, stretched, or split earlobes.',
         description: 'A precise surgical procedure to correct torn, stretched, or split earlobes, restoring their natural shape and symmetry for wearing earrings again.',
-        image: 'https://images.unsplash.com/photo-1589710751893-f9a6770ad71b?w=800&q=80',
+        image: 'https://www.rmskinclinic.com/wp-content/uploads/2023/07/Ear-Lobe-Repair-image.jpg',
         duration: '30-45 mins',
         sessions: '1 session',
         recovery: '1-2 weeks',
@@ -365,7 +336,7 @@ export const skinTreatments = [
         title: 'Keloid Surgery',
         shortDescription: 'Specialized removal of thick, raised scar tissue with recurrence prevention.',
         description: 'Specialized removal of thick, raised scar tissue (keloids) followed by tailored plans including injections and pressure therapy to minimize the risk of recurrence.',
-        image: 'https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=800&q=80',
+        image: 'https://www.datocms-assets.com/143612/1728493620-keloid-1.jpeg?auto=format,compress&w=1200&q=90',
         duration: '45-90 mins',
         sessions: '1 surgery + follow-up injections',
         recovery: '2-4 weeks',
@@ -395,7 +366,7 @@ export const skinTreatments = [
         title: 'Botox Treatment',
         shortDescription: 'Non-surgical treatment that relaxes facial muscles to soften wrinkles.',
         description: 'A non-surgical cosmetic treatment that relaxes facial muscles to soften fine lines and dynamic wrinkles for a youthful, refreshed look without surgery.',
-        image: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=800&q=80',
+        image: 'https://i0.wp.com/www.perfectdrs.com/wp-content/uploads/2025/12/Botox-vs-fillers.webp?w=1920&ssl=1',
         duration: '15-30 mins',
         sessions: 'Every 4-6 months',
         recovery: 'None',
@@ -425,7 +396,7 @@ export const skinTreatments = [
         title: 'HydraFacial Treatment',
         shortDescription: 'Multi-step procedure that cleanses, exfoliates, and hydrates using patented technology.',
         description: 'A multi-step procedure that cleanses, exfoliates, extracts, and hydrates the skin using patented vortex technology and nourishing serums for instantly glowing skin.',
-        image: 'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=800&q=80',
+        image: 'https://nubospa.com/wp-content/uploads/sites/210/2022/11/1617917820-8ff0e3a4-e410-4de1-bede-f6b9f0765d60-1024x615.jpg.webp',
         duration: '45-60 mins',
         sessions: 'Monthly maintenance',
         recovery: 'None',
@@ -455,41 +426,11 @@ export const skinTreatments = [
 // Hair Treatments Data - From Paavai Hospital
 export const hairTreatments = [
     {
-        id: 'hair-fall-control',
-        title: 'Hair Fall Control',
-        shortDescription: 'Comprehensive solutions to stop hair fall and strengthen hair follicles.',
-        description: 'Our hair fall control program addresses the root causes of hair loss through advanced diagnostics, medical treatments, and regenerative therapies for thicker, stronger hair.',
-        image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&q=80',
-        duration: '45-60 mins',
-        sessions: '6-12 sessions',
-        recovery: 'None',
-        benefits: [
-            'Reduces hair fall significantly',
-            'Strengthens hair follicles',
-            'Improves scalp health',
-            'Promotes thicker hair',
-            'Addresses underlying causes'
-        ],
-        procedure: [
-            { step: 1, title: 'Diagnosis', description: 'Comprehensive scalp analysis and blood tests' },
-            { step: 2, title: 'Treatment Plan', description: 'Customized treatment protocol' },
-            { step: 3, title: 'Therapy', description: 'Mesotherapy, LED, or medical treatments' },
-            { step: 4, title: 'Home Care', description: 'Prescribed medications and products' },
-            { step: 5, title: 'Follow-up', description: 'Regular monitoring and adjustments' }
-        ],
-        technology: 'Mesotherapy, Low-Level Laser Therapy (LLLT), Medical Management',
-        faqs: [
-            { question: 'What causes hair fall?', answer: 'Causes include stress, hormones, nutrition, genetics, and scalp conditions.' },
-            { question: 'How soon will I see results?', answer: 'Reduction in hair fall within 4-6 weeks; new growth in 3-4 months.' },
-            { question: 'Is treatment lifelong?', answer: 'Maintenance may be needed depending on the cause of hair fall.' }
-        ]
-    },
-    {
         id: 'prp-hair-treatment',
         title: 'PRP Hair Treatment',
         shortDescription: 'Regenerate hair growth naturally with your own platelet-rich plasma.',
         description: 'PRP therapy uses your body\'s natural growth factors to stimulate hair follicles, promote new growth, and strengthen existing hair for natural-looking results.',
-        image: 'https://images.unsplash.com/photo-1559599101-f09722fb4948?w=800&q=80',
+        image: 'https://plus.unsplash.com/premium_photo-1702598743989-4884b9782e18?q=80&w=871&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         duration: '60-90 mins',
         sessions: '4-6 sessions',
         recovery: 'Minimal',
@@ -515,63 +456,93 @@ export const hairTreatments = [
         ]
     },
     {
-        id: 'hair-regrowth-therapy',
-        title: 'Hair Regrowth Therapy',
-        shortDescription: 'Advanced treatments to restore hair density and coverage.',
-        description: 'Our hair regrowth program combines multiple modalities including laser therapy, PRP, and growth factors to maximize hair restoration results.',
-        image: 'https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=800&q=80',
-        duration: '60-90 mins',
-        sessions: '8-12 sessions',
-        recovery: 'Minimal',
+        id: 'meta-cell-therapy',
+        title: 'Meta Cell Therapy',
+        shortDescription: 'Advanced regenerative treatment using autologous exosomes to reactivate follicles.',
+        description: 'Meta Cell Therapy harnesses the power of your body\'s own stem-cell-derived exosomes to signal hair regeneration, improve scalp health, and thicken existing hair without surgery.',
+        image: 'https://plus.unsplash.com/premium_photo-1674841253335-6c892a8b1dc1?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        duration: '45-60 mins',
+        sessions: '3-6 sessions',
+        recovery: 'None',
         benefits: [
-            'Stimulates dormant follicles',
-            'Increases hair density',
-            'Improves hair thickness',
-            'Comprehensive approach',
-            'Sustainable results'
+            'Reactivates dormant follicles',
+            'Boosts scalp circulation',
+            'Non-surgical regeneration',
+            'Thickens thinning hair',
+            'Safe autologous treatment'
         ],
         procedure: [
-            { step: 1, title: 'Assessment', description: 'Detailed hair density mapping' },
-            { step: 2, title: 'Multi-Modal Treatment', description: 'Combined laser, PRP, and growth factor therapy' },
-            { step: 3, title: 'Scalp Treatment', description: 'Specialized scalp treatments' },
-            { step: 4, title: 'Medical Support', description: 'FDA-approved medications if needed' },
-            { step: 5, title: 'Monitoring', description: 'Progress tracking with photography' }
+            { step: 1, title: 'Isolation', description: 'Extraction of growth factors/exosomes' },
+            { step: 2, title: 'Activation', description: 'Scalp preparation for absorption' },
+            { step: 3, title: 'Infusion', description: 'Precise micro-injections into scalp' },
+            { step: 4, title: 'Stimulation', description: 'Low-level light activation' },
+            { step: 5, title: 'Nourish', description: 'Post-treatment serum application' }
         ],
-        technology: 'LLLT, PRP, Growth Factor Therapy, Medical Management',
+        technology: 'Autologous Exosomes, Stem Cell Signaling',
         faqs: [
-            { question: 'Who is a good candidate?', answer: 'Those with early to moderate hair loss see the best results.' },
-            { question: 'Can women undergo this treatment?', answer: 'Yes, the treatment is effective for both men and women.' },
-            { question: 'Is it better than transplant?', answer: 'It can be used alone or to maximize transplant results.' }
+            { question: 'What are exosomes?', answer: 'Cellular messengers that signal your hair follicles to grow and repair.' },
+            { question: 'Is it painful?', answer: 'Discomfort is minimal; it is less invasive than surgery.' },
+            { question: 'Who is it for?', answer: 'Ideal for early-stage thinning and strengthening weak hair.' }
         ]
     },
     {
-        id: 'scalp-dandruff-care',
-        title: 'Scalp & Dandruff Care',
-        shortDescription: 'Restore scalp health and eliminate dandruff for healthy hair growth.',
-        description: 'Our scalp care treatments address dandruff, seborrhea, and scalp conditions that can lead to hair problems using medical-grade treatments for a healthy scalp.',
-        image: 'https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=800&q=80',
-        duration: '45-60 mins',
-        sessions: '4-6 sessions',
+        id: 'oxygen-laser-therapy',
+        title: 'Oxygen Laser Therapy',
+        shortDescription: 'Synergistic combination of laser energy and oxygen infusion for scalp health.',
+        description: 'A dual-action treatment combining nourishing oxygen infusion with bio-stimulating low-level laser energy to detoxify the scalp, reduce inflammation, and accelerate hair growth.',
+        image: 'https://plus.unsplash.com/premium_photo-1682089810582-f7b200217b67?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        duration: '30-45 mins',
+        sessions: '8-12 sessions',
         recovery: 'None',
         benefits: [
-            'Eliminates dandruff',
-            'Reduces scalp irritation',
-            'Balances oil production',
-            'Improves scalp health',
-            'Creates optimal growth environment'
+            'Detoxifies the scalp',
+            'Stimulates cellular energy (ATP)',
+            'Reduces scalp inflammation',
+            'Increases nutrient delivery',
+            'Painless and relaxing'
         ],
         procedure: [
-            { step: 1, title: 'Diagnosis', description: 'Scalp examination and condition assessment' },
-            { step: 2, title: 'Deep Cleanse', description: 'Medical-grade scalp cleansing' },
-            { step: 3, title: 'Treatment', description: 'Antifungal/antibacterial therapy' },
-            { step: 4, title: 'Hydration', description: 'Scalp balancing and hydration' },
-            { step: 5, title: 'Home Care', description: 'Customized home care regimen' }
+            { step: 1, title: 'Cleanse', description: 'Deep scalp cleansing' },
+            { step: 2, title: 'Laser', description: 'Bio-stimulating laser application' },
+            { step: 3, title: 'Oxygen', description: 'Pure oxygen infusion' },
+            { step: 4, title: 'Nurture', description: 'Hair growth serum application' },
+            { step: 5, title: 'Massage', description: 'Stimulating scalp massage' }
         ],
-        technology: 'Scalp Micropeel, Medical-Grade Treatments, LED Therapy',
+        technology: 'Low-Level Laser Therapy (LLLT), O2 Infusion',
         faqs: [
-            { question: 'What causes dandruff?', answer: 'Dandruff is often caused by fungal overgrowth, dry scalp, or skin conditions.' },
-            { question: 'Is it curable?', answer: 'Most scalp conditions can be controlled effectively with proper treatment.' },
-            { question: 'Will it help with hair growth?', answer: 'A healthy scalp creates the optimal environment for hair growth.' }
+            { question: 'Does it hurt?', answer: 'No, it is a completely painless and relaxing experience.' },
+            { question: 'Can it stop hair loss?', answer: 'It is excellent for arresting active hair fall and improving scalp health.' },
+            { question: 'How often should I do it?', answer: 'Weekly sessions are typically recommended for best results.' }
+        ]
+    },
+    {
+        id: 'hair-transplantation',
+        title: 'Hair Transplantation',
+        shortDescription: 'Permanent restoration of hair density using advanced FUE/FUT techniques.',
+        description: 'The gold standard for restoring lost hair, relocating healthy hair follicles from donor areas to thinning regions for permanent, natural-looking coverage and density.',
+        image: 'https://www.orangetreehealth.com/blog/wp-content/uploads/2024/12/img-Hair-Transplant-For-Women-How-Does-It-Work.jpg',
+        duration: '4-8 hours',
+        sessions: '1-2 sessions',
+        recovery: '7-10 days',
+        benefits: [
+            'Permanent hair restoration',
+            'Natural-looking hairline',
+            'Uses your own natural hair',
+            'Boosts confidence significantly',
+            'Minimal scarring with FUE'
+        ],
+        procedure: [
+            { step: 1, title: 'Design', description: 'Hairline design and planning' },
+            { step: 2, title: 'Harvest', description: 'Extraction of donor follicles (FUE/FUT)' },
+            { step: 3, title: 'Preparation', description: 'Microscopic graft dissection' },
+            { step: 4, title: 'Implantation', description: 'Precice placement of grafts' },
+            { step: 5, title: 'Recovery', description: 'Post-op care and follow-up' }
+        ],
+        technology: 'FUE (Follicular Unit Extraction), Sapphire Blades',
+        faqs: [
+            { question: 'Is the result permanent?', answer: 'Yes, transplanted hair behaves like donor hair and is permanent.' },
+            { question: 'Is surgery painful?', answer: 'Local anesthesia makes the procedure painless.' },
+            { question: 'When does it grow?', answer: 'New growth starts in 3-4 months, with full results in 12 months.' }
         ]
     }
 ];

@@ -5,36 +5,21 @@ import './TreatmentCategories.css';
 const categories = [
     {
         id: 'skin-rejuvenation',
-        title: 'Skin Rejuvenation',
+        title: 'Skin Treatments',
         description: 'Restore youthful radiance with advanced skin treatments',
         icon: Sparkles,
         link: '/skin-treatments',
         gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
     },
     {
-        id: 'laser-treatments',
-        title: 'Laser Treatments',
-        description: 'Precision laser technology for flawless skin',
+        id: 'hair-treatments',
+        title: 'Hair Treatments',
+        description: 'Advanced solutions for healthy, thick hair',
         icon: Zap,
-        link: '/skin-treatments',
+        link: '/hair-treatments',
         gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'
     },
-    {
-        id: 'cosmetic-procedures',
-        title: 'Cosmetic Procedures',
-        description: 'Non-invasive treatments for natural beauty',
-        icon: Heart,
-        link: '/skin-treatments',
-        gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'
-    },
-    {
-        id: 'hair-restoration',
-        title: 'Hair Restoration',
-        description: 'Advanced solutions for healthy, thick hair',
-        icon: Scissors,
-        link: '/hair-treatments',
-        gradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)'
-    }
+
 ];
 
 const TreatmentCategories = () => {

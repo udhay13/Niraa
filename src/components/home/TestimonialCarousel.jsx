@@ -15,19 +15,19 @@ const TestimonialCarousel = () => {
             treatment: 'Laser Hair Reduction',
             rating: 5,
             text: 'After just 4 sessions, I can see a dramatic reduction in hair growth. The treatment was virtually painless thanks to their advanced cooling technology. The staff is professional and the clinic feels so premium!',
-            image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80'
+            image: 'https://plus.unsplash.com/premium_photo-1682089810582-f7b200217b67?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
         },
         {
             id: 2,
-            name: 'Rahul Mehta',
+            name: 'Naveen Kumar',
             treatment: 'Acne Scar Treatment',
             rating: 5,
-            text: 'I had deep acne scars for years that affected my confidence. Dr. Niraa\'s team used a combination of lasers and PRP that gave me incredible results. My skin texture has improved significantly!',
-            image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80'
+            text: 'I had deep acne scars for years that affected my confidence. Dr. Paavai\'s team used a combination of lasers and PRP that gave me incredible results. My skin texture has improved significantly!',
+            image: 'https://i.ibb.co/20M0nD44/Whats-App-Image-2026-01-26-at-10-25-30-PM.jpg'
         },
         {
             id: 3,
-            name: 'Anjali Reddy',
+            name: 'Swathi Sethuraman',
             treatment: 'HydraFacial',
             rating: 5,
             text: 'The HydraFacial here is the best I\'ve ever had! My skin was glowing immediately after, and the results lasted for weeks. I\'ve made it a monthly ritual now. Highly recommend!',
@@ -35,7 +35,7 @@ const TestimonialCarousel = () => {
         },
         {
             id: 4,
-            name: 'Vikram Singh',
+            name: 'Viswa Sekar',
             treatment: 'PRP Hair Treatment',
             rating: 5,
             text: 'Was skeptical about PRP at first, but the results speak for themselves. My hairline has improved and new hair growth is visible. The team explained everything thoroughly and made me feel comfortable.',
@@ -43,10 +43,10 @@ const TestimonialCarousel = () => {
         },
         {
             id: 5,
-            name: 'Sneha Kapoor',
-            treatment: 'Anti-Ageing Treatment',
+            name: 'Shalini Ravi',
+            treatment: 'Botox Treatment',
             rating: 5,
-            text: 'The RF skin tightening treatment has taken years off my face! The fine lines around my eyes are barely visible now. Love how natural the results look - no one knows I had any work done!',
+            text: 'I was hesitant about Botox, but Dr. Paavai\'s approach is so natural. The frown lines are gone, and I look refreshed, not frozen. It\'s given me so much confidence in my appearance.',
             image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80'
         }
     ];

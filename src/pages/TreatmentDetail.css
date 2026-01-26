@@ -685,7 +685,7 @@
 .treatment-cta {
     position: relative;
     background: var(--gradient-gold);
-    padding: var(--space-16) 0;
+    padding: var(--space-6) 0;
     overflow: hidden;
 }
 
@@ -700,38 +700,58 @@
 
 .cta-content {
     position: relative;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
     color: var(--color-white);
+    gap: var(--space-8);
 }
 
 .cta-content h2 {
-    font-size: var(--text-3xl);
+    font-size: var(--text-2xl);
     color: var(--color-white);
-    margin-bottom: var(--space-4);
+    margin-bottom: 0;
+    white-space: nowrap;
 }
 
 .cta-content p {
-    font-size: var(--text-lg);
+    font-size: var(--text-base);
     color: rgba(255, 255, 255, 0.9);
-    margin-bottom: var(--space-8);
+    margin-bottom: 0;
+    max-width: 500px;
 }
 
 .cta-button {
     display: inline-flex;
     align-items: center;
     gap: var(--space-3);
-    padding: var(--space-4) var(--space-8);
+    padding: var(--space-3) var(--space-6);
     background: var(--color-white);
     color: var(--color-accent);
     font-weight: var(--font-semibold);
     border-radius: var(--radius-full);
     transition: all 0.3s ease;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .cta-button:hover {
     transform: translateY(-3px);
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 992px) {
+    .cta-content {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-4);
+    }
+
+    .cta-content h2 {
+        white-space: normal;
+    }
 }
 
 /* Related Treatments */

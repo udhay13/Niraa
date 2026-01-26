@@ -34,7 +34,7 @@ const heroSlidesData = [
         subtitle: 'Advanced Technology',
         highlight: 'Laser Treatments',
         description: 'State-of-the-art laser technology for flawless, even-toned skin',
-        image: 'https://images.unsplash.com/photo-1519415510236-718bdfcd89c8?w=1920&q=80',
+        image: 'https://plus.unsplash.com/premium_photo-1661645609070-4bc941a2ce35?q=80&w=869&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         treatments: ['Hair Removal', 'Pigmentation', 'Skin Resurfacing'],
         cta: 'Learn More',
         link: '/skin-treatments'

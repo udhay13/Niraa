@@ -33,9 +33,10 @@
 }
 
 .categories-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    justify-content: center;
     gap: var(--space-6);
+    flex-wrap: wrap;
 }
 
 .category-card {
@@ -46,6 +47,9 @@
     text-decoration: none;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+    max-width: 350px;
+    flex: 1 1 300px;
     overflow: hidden;
     animation: fadeInUp 0.6s ease-out forwards;
     animation-delay: var(--delay, 0s);

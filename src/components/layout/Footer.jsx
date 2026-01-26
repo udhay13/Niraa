@@ -10,21 +10,21 @@ import {
 } from 'lucide-react';
 import './Footer.css';
 
+import { skinTreatments, hairTreatments } from '../../data/treatments';
+
 const Footer = () => {
     const currentYear = new Date().getFullYear();
 
-    const skinTreatments = [
-        { name: 'Acne Treatment', path: '/treatments/acne-treatment' },
-        { name: 'Pigmentation', path: '/treatments/pigmentation-treatment' },
-        { name: 'Anti-Ageing', path: '/treatments/anti-ageing-treatment' },
-        { name: 'Hydra Facial', path: '/treatments/hydra-facial' },
-    ];
+    // Select specific treatments for footer or just take the first 4-5
+    const footerSkinTreatments = skinTreatments.slice(0, 5).map(t => ({
+        name: t.title,
+        path: `/treatments/${t.id}`
+    }));
 
-    const hairTreatments = [
-        { name: 'Laser Hair Reduction', path: '/treatments/laser-hair-reduction' },
-        { name: 'PRP Treatment', path: '/treatments/prp-hair-treatment' },
-        { name: 'Hair Fall Control', path: '/treatments/hair-fall-control' },
-    ];
+    const footerHairTreatments = hairTreatments.slice(0, 5).map(t => ({
+        name: t.title,
+        path: `/treatments/${t.id}`
+    }));
 
     const quickLinks = [
         { name: 'About Us', path: '/about' },
@@ -62,10 +62,11 @@ const Footer = () => {
                         </div>
 
                         {/* Skin Treatments */}
+                        {/* Skin Treatments */}
                         <div className="footer-column">
                             <h4 className="footer-title">Skin Treatments</h4>
                             <ul className="footer-links">
-                                {skinTreatments.map((item) => (
+                                {footerSkinTreatments.map((item) => (
                                     <li key={item.path}>
                                         <Link to={item.path}>{item.name}</Link>
                                     </li>
@@ -80,7 +81,7 @@ const Footer = () => {
                         <div className="footer-column">
                             <h4 className="footer-title">Hair Treatments</h4>
                             <ul className="footer-links">
-                                {hairTreatments.map((item) => (
+                                {footerHairTreatments.map((item) => (
                                     <li key={item.path}>
                                         <Link to={item.path}>{item.name}</Link>
                                     </li>

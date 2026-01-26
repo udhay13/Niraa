@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { skinTreatments, hairTreatments } from '../../data/treatments';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, Phone } from 'lucide-react';
 import './Header.css';
@@ -24,28 +25,29 @@ const Header = () => {
         setActiveDropdown(null);
     }, [location]);
 
-    const skinTreatments = [
-        { name: 'Acne Treatment', path: '/treatments/chemical-peel' },
-        { name: 'Acne Scar Reduction', path: '/treatments/acne-scar-surgery' },
-        { name: 'Pigmentation Treatment', path: '/treatments/pigmentation-treatment' },
-        { name: 'Anti-Ageing & Wrinkle Reduction', path: '/treatments/botox-treatment' },
-        { name: 'Skin Brightening & Glow', path: '/treatments/photo-facial' },
-        { name: 'Chemical Peels', path: '/treatments/chemical-peel' },
-        { name: 'Hydra Facial', path: '/treatments/hydrafacial-treatment' },
-        { name: 'Laser Skin Rejuvenation', path: '/treatments/skin-rejuvenation' },
+
+
+    // Filter for major 5 skin treatments for the header
+    const majorSkinIds = [
+        'skin-rejuvenation',
+        'hydrafacial-treatment',
+        'chemical-peel',
+        'botox-treatment',
+        'pigmentation-treatment'
     ];
 
-    const hairTreatments = [
-        { name: 'Laser Hair Reduction', path: '/treatments/laser-hair-removal' },
-        { name: 'Hair Fall Control', path: '/treatments/hair-fall-control' },
-        { name: 'PRP Hair Treatment', path: '/treatments/prp-hair-treatment' },
-        { name: 'Hair Regrowth Therapy', path: '/treatments/hair-regrowth-therapy' },
-        { name: 'Scalp & Dandruff Care', path: '/treatments/scalp-dandruff-care' },
-    ];
+    const headerSkinTreatments = skinTreatments.filter(t => majorSkinIds.includes(t.id));
+
+    // Hair treatments are already 5, so we use them directly
+    const headerHairTreatments = hairTreatments.slice(0, 5);
 
     const handleWhatsApp = () => {
         const message = encodeURIComponent('Hello! I would like to book an appointment at Niraa Aesthetics.');
         window.open(`https://wa.me/917200854999?text=${message}`, '_blank');
+    };
+
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     const toggleDropdown = (dropdown) => {
@@ -56,7 +58,7 @@ const Header = () => {
         <header className={`header ${isScrolled ? 'header-scrolled' : ''}`}>
             <div className="header-container">
                 {/* Logo */}
-                <Link to="/" className="header-logo">
+                <Link to="/" className="header-logo" onClick={scrollToTop}>
                     <img src={logo} alt="Niraa Aesthetics" className="logo-image" />
                 </Link>
 
@@ -71,9 +73,9 @@ const Header = () => {
                         <div className="dropdown-menu">
                             <Link to="/skin-treatments" className="dropdown-header">All Skin Treatments</Link>
                             <div className="dropdown-divider"></div>
-                            {skinTreatments.map((item) => (
-                                <Link key={item.path} to={item.path} className="dropdown-item">
-                                    {item.name}
+                            {headerSkinTreatments.map((item) => (
+                                <Link key={item.id} to={`/treatments/${item.id}`} className="dropdown-item">
+                                    {item.title}
                                 </Link>
                             ))}
                         </div>
@@ -86,9 +88,9 @@ const Header = () => {
                         <div className="dropdown-menu">
                             <Link to="/hair-treatments" className="dropdown-header">All Hair Treatments</Link>
                             <div className="dropdown-divider"></div>
-                            {hairTreatments.map((item) => (
-                                <Link key={item.path} to={item.path} className="dropdown-item">
-                                    {item.name}
+                            {headerHairTreatments.map((item) => (
+                                <Link key={item.id} to={`/treatments/${item.id}`} className="dropdown-item">
+                                    {item.title}
                                 </Link>
                             ))}
                         </div>
@@ -126,7 +128,7 @@ const Header = () => {
             {/* Mobile Sidebar Navigation */}
             <div className={`mobile-sidebar ${isMobileMenuOpen ? 'mobile-sidebar-open' : ''}`}>
                 <div className="sidebar-header">
-                    <Link to="/" className="header-logo" onClick={() => setIsMobileMenuOpen(false)}>
+                    <Link to="/" className="header-logo" onClick={() => { setIsMobileMenuOpen(false); scrollToTop(); }}>
                         <img src={logo} alt="Niraa Aesthetics" className="logo-image" />
                     </Link>
                     <button
@@ -151,9 +153,9 @@ const Header = () => {
                         </button>
                         <div className={`sidebar-dropdown-menu ${activeDropdown === 'skin' ? 'open' : ''}`}>
                             <Link to="/skin-treatments" className="sidebar-dropdown-item" onClick={() => setIsMobileMenuOpen(false)}>All Skin Treatments</Link>
-                            {skinTreatments.map((item) => (
-                                <Link key={item.path} to={item.path} className="sidebar-dropdown-item" onClick={() => setIsMobileMenuOpen(false)}>
-                                    {item.name}
+                            {headerSkinTreatments.map((item) => (
+                                <Link key={item.id} to={`/treatments/${item.id}`} className="sidebar-dropdown-item" onClick={() => setIsMobileMenuOpen(false)}>
+                                    {item.title}
                                 </Link>
                             ))}
                         </div>
@@ -169,9 +171,9 @@ const Header = () => {
                         </button>
                         <div className={`sidebar-dropdown-menu ${activeDropdown === 'hair' ? 'open' : ''}`}>
                             <Link to="/hair-treatments" className="sidebar-dropdown-item" onClick={() => setIsMobileMenuOpen(false)}>All Hair Treatments</Link>
-                            {hairTreatments.map((item) => (
-                                <Link key={item.path} to={item.path} className="sidebar-dropdown-item" onClick={() => setIsMobileMenuOpen(false)}>
-                                    {item.name}
+                            {headerHairTreatments.map((item) => (
+                                <Link key={item.id} to={`/treatments/${item.id}`} className="sidebar-dropdown-item" onClick={() => setIsMobileMenuOpen(false)}>
+                                    {item.title}
                                 </Link>
                             ))}
                         </div>

@@ -117,7 +117,7 @@ const AdminDashboard = () => {
         const blogData = {
             ...formData,
             tags: formData.tags.split(',').map(tag => tag.trim()).filter(tag => tag),
-            author: 'Dr. Nira Team'
+            author: 'Dr. Paavai Team'
         };
 
         if (editingBlog) {

@@ -47,7 +47,7 @@ If over-the-counter products aren't working after 8-12 weeks, or if you're devel
 *Book a consultation at Niraa Aesthetics for a personalized acne treatment plan.*
     `,
         image: '/images/blog/acne-blog.jpg',
-        author: 'Dr. Niraa Team',
+        author: 'Dr. Paavai Team',
         category: 'Skin Care',
         tags: ['acne', 'skin care', 'treatment', 'dermatology'],
         publishedAt: '2024-01-15',
@@ -102,7 +102,7 @@ We use the Soprano ICE Platinum system - the gold standard in laser hair removal
 *Schedule your laser hair removal consultation today!*
     `,
         image: '/images/blog/laser-hair-blog.jpg',
-        author: 'Dr. Nira Team',
+        author: 'Dr. Paavai Team',
         category: 'Hair Removal',
         tags: ['laser', 'hair removal', 'permanent', 'beauty'],
         publishedAt: '2024-01-20',
@@ -174,7 +174,7 @@ It's never too early or too late! Prevention in your 20s, maintenance in your 30
 *Consult our dermatologists for a personalized anti-aging plan.*
     `,
         image: '/images/blog/anti-aging-blog.jpg',
-        author: 'Dr. Nira Team',
+        author: 'Dr. Paavai Team',
         category: 'Anti-Aging',
         tags: ['anti-aging', 'skincare', 'wrinkles', 'youthful skin'],
         publishedAt: '2024-01-25',
