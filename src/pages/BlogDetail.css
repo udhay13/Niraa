@@ -111,7 +111,7 @@
 }
 
 .featured-image {
-    margin: calc(-1 * var(--space-24)) auto var(--space-12);
+    margin: calc(-1 * var(--space-12)) auto var(--space-12);
     border-radius: var(--radius-2xl);
     overflow: hidden;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
