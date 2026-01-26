@@ -306,7 +306,7 @@ const AdminDashboard = () => {
                                 {formData.image && (
                                     <div style={{ marginTop: '1rem' }}>
                                         <p style={{ fontSize: '0.8rem', color: 'var(--color-text-light)', marginBottom: '5px' }}>Preview:</p>
-                                        <div style={{ position: 'relative', width: 'fit-content' }}>
+                                        <div style={{ position: 'relative', width: 'fit-content', maxWidth: '100%' }}>
                                             <img
                                                 src={formData.image}
                                                 alt="Preview"
@@ -314,10 +314,10 @@ const AdminDashboard = () => {
                                                     e.target.style.display = 'none';
                                                     e.target.nextSibling.style.display = 'flex';
                                                 }}
-                                                style={{ height: '150px', borderRadius: '8px', objectFit: 'cover', border: '1px solid #eee' }}
+                                                style={{ height: '150px', borderRadius: '8px', objectFit: 'cover', border: '1px solid #eee', maxWidth: '100%' }}
                                             />
                                             <div style={{
-                                                display: 'none', height: '150px', width: '200px', background: '#fee2e2',
+                                                display: 'none', height: '150px', width: '200px', maxWidth: '100%', background: '#fee2e2',
                                                 borderRadius: '8px', alignItems: 'center', justifyContent: 'center',
                                                 color: '#b91c1c', fontSize: '0.9rem', padding: '10px', textAlign: 'center'
                                             }}>
