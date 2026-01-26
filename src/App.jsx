@@ -14,6 +14,8 @@ import BlogList from './pages/BlogList';
 import BlogDetail from './pages/BlogDetail';
 import AdminLogin from './pages/admin/AdminLogin';
 import AdminDashboard from './pages/admin/AdminDashboard';
+import Terms from './pages/Terms';
+import Privacy from './pages/Privacy';
 
 // Styles
 import './index.css';
@@ -38,6 +40,8 @@ function App() {
             <Route path="contact" element={<Contact />} />
             <Route path="blogs" element={<BlogList />} />
             <Route path="blogs/:slug" element={<BlogDetail />} />
+            <Route path="terms-of-service" element={<Terms />} />
+            <Route path="privacy-policy" element={<Privacy />} />
           </Route>
         </Routes>
       </Router>

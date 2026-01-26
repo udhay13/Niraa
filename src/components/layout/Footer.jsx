@@ -147,11 +147,11 @@ const Footer = () => {
             <div className="footer-bottom">
                 <div className="container">
                     <div className="bottom-content">
-                        <p>© {currentYear} Nira Aesthetics. All rights reserved.</p>
+                        <p>© {currentYear} Niraa Aesthetics. All rights reserved.</p>
                         <div className="bottom-links">
                             <Link to="/privacy-policy">Privacy Policy</Link>
                             <span className="divider">|</span>
-                            <Link to="/terms">Terms of Service</Link>
+                            <Link to="/terms-of-service">Terms of Service</Link>
                         </div>
                     </div>
                 </div>
