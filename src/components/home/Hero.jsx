@@ -250,7 +250,7 @@ const Hero = () => {
 
     const handleWhatsApp = () => {
         const message = encodeURIComponent('Hello! I would like to book a consultation at Niraa Aesthetics.');
-        window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
+        window.open(`https://wa.me/917200854999?text=${message}`, '_blank');
     };
 
     // Calculate active indicator index (0-3)
@@ -326,11 +326,11 @@ const Hero = () => {
             <div className="hero-contact-bar">
                 <div className="container contact-bar-content">
                     <span className="contact-label">Talk to our experts</span>
-                    <a href="tel:+919876543210" className="contact-phone">
-                        <Phone size={16} /> +91 98765 43210
+                    <a href="tel:+917200854999" className="contact-phone">
+                        <Phone size={16} /> +91 72008 54999
                     </a>
                     <span className="contact-divider">|</span>
-                    <span className="contact-trust">⭐ Rated 4.9/5 by 10,000+ clients</span>
+                    <span className="contact-trust">⭐ Rated 4.9/5 by 1000+ clients</span>
                 </div>
             </div>
         </section>

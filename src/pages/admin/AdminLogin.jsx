@@ -105,9 +105,7 @@ const AdminLogin = () => {
                         </button>
                     </form>
 
-                    <p className="demo-note">
-                        <strong>Demo Password:</strong> nira2024
-                    </p>
+                    {/* Demo password removed */}
                 </div>
             </div>
         </div>

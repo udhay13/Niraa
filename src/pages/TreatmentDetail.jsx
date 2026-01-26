@@ -8,7 +8,8 @@ import {
     ChevronDown,
     ChevronUp,
     Phone,
-    Sparkles
+    Sparkles,
+    User
 } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { getTreatmentById, skinTreatments, hairTreatments } from '../data/treatments';
@@ -60,9 +61,9 @@ const TreatmentDetail = () => {
 
     const handleWhatsApp = () => {
         const message = encodeURIComponent(
-            `Hello! I'm interested in the ${treatment.title} treatment at Niraa Aesthetics. Please share more details.`
+            `Hello! I would like to book a consultation for ${treatment.title} at Niraa Aesthetics.`
         );
-        window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
+        window.open(`https://wa.me/917200854999?text=${message}`, '_blank');
     };
 
     const isSkinTreatment = skinTreatments.some(t => t.id === id);
@@ -231,39 +232,36 @@ const TreatmentDetail = () => {
                 </div>
             </section>
 
-            {/* Safety Section */}
+            {/* Safety Compact Section */}
             <section
+                className={`treatment-safety-compact animate-section ${visibleSections.safety ? 'visible' : ''}`}
                 id="safety"
-                className={`treatment-safety section animate-section ${visibleSections.safety ? 'visible' : ''}`}
             >
                 <div className="container">
-                    <div className="safety-card">
-                        <div className="safety-icon">
-                            <Shield size={48} />
+                    <div className="safety-grid-compact">
+                        <div className="safety-item-compact">
+                            <div className="safety-icon-compact">
+                                <CheckCircle size={24} />
+                            </div>
+                            <span>Dermatologist Supervised</span>
                         </div>
-                        <h3>Your Safety is Our Priority</h3>
-                        <p>
-                            All treatments at Niraa Aesthetics are performed under the supervision of
-                            certified dermatologists. We follow strict safety protocols and use only
-                            FDA-approved technology.
-                        </p>
-                        <div className="safety-features">
-                            <div className="safety-feature">
-                                <CheckCircle size={18} />
-                                <span>Dermatologist Supervised</span>
+                        <div className="safety-item-compact">
+                            <div className="safety-icon-compact">
+                                <Shield size={24} />
                             </div>
-                            <div className="safety-feature">
-                                <CheckCircle size={18} />
-                                <span>FDA-Approved Technology</span>
+                            <span>FDA-Approved Technology</span>
+                        </div>
+                        <div className="safety-item-compact">
+                            <div className="safety-icon-compact">
+                                <Sparkles size={24} />
                             </div>
-                            <div className="safety-feature">
-                                <CheckCircle size={18} />
-                                <span>Sterile Environment</span>
+                            <span>Sterile Environment</span>
+                        </div>
+                        <div className="safety-item-compact">
+                            <div className="safety-icon-compact">
+                                <User size={24} />
                             </div>
-                            <div className="safety-feature">
-                                <CheckCircle size={18} />
-                                <span>Personalized Care</span>
-                            </div>
+                            <span>Personalized Care</span>
                         </div>
                     </div>
                 </div>

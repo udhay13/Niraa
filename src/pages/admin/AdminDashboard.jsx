@@ -10,7 +10,8 @@ import {
     X,
     FileText,
     Link as LinkIcon,
-    Image as ImageIcon
+    Image as ImageIcon,
+    Menu
 } from 'lucide-react';
 import { useBlog } from '../../context/BlogContext';
 import './AdminDashboard.css';
@@ -28,6 +29,7 @@ const AdminDashboard = () => {
     const navigate = useNavigate();
 
     const [showEditor, setShowEditor] = useState(false);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [editingBlog, setEditingBlog] = useState(null);
     const [formData, setFormData] = useState({
         title: '',
@@ -139,13 +141,22 @@ const AdminDashboard = () => {
 
     return (
         <div className="admin-dashboard">
+            {/* Mobile Overlay */}
+            <div
+                className={`admin-mobile-overlay ${isSidebarOpen ? 'open' : ''}`}
+                onClick={() => setIsSidebarOpen(false)}
+            ></div>
+
             {/* Sidebar */}
-            <aside className="admin-sidebar">
+            <aside className={`admin-sidebar ${isSidebarOpen ? 'open' : ''}`}>
                 <div className="sidebar-header">
                     <Link to="/" className="admin-logo">
                         <span className="logo-text">Niraa</span>
                         <span className="logo-accent">Admin</span>
                     </Link>
+                    <button className="sidebar-close-btn" onClick={() => setIsSidebarOpen(false)}>
+                        <X size={24} />
+                    </button>
                 </div>
 
                 <nav className="sidebar-nav">
@@ -166,7 +177,12 @@ const AdminDashboard = () => {
             {/* Main Content */}
             <main className="admin-main">
                 <header className="admin-header">
-                    <h1>Blog Management</h1>
+                    <div className="header-title-group">
+                        <button className="mobile-menu-btn" onClick={() => setIsSidebarOpen(true)}>
+                            <Menu size={24} />
+                        </button>
+                        <h1>Blog Management</h1>
+                    </div>
                     <div className="header-actions" style={{ display: 'flex', gap: '1rem' }}>
                         {blogs.length === 0 && (
                             <button className="btn btn-secondary" onClick={seedBlogs}>

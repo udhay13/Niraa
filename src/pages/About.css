@@ -308,8 +308,18 @@
         text-align: center;
     }
 
+    .team-image-featured {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1;
+        /* Make it square */
+    }
+
     .team-image-featured img {
-        height: 280px;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        object-position: top center;
     }
 
     .team-qualifications {

@@ -29,7 +29,7 @@ const Contact = () => {
             `Message:\n${formData.message}`
         );
 
-        window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
+        window.open(`https://wa.me/917200854999?text=${message}`, '_blank');
     };
 
     return (
@@ -64,7 +64,7 @@ const Contact = () => {
                                     <MapPin size={24} />
                                     <div>
                                         <h4>Visit Us</h4>
-                                        <p>123 Premium Plaza, HSR Layout<br />Bangalore - 560102</p>
+                                        <p>T S, no 89, Auto Nagar, Indhira nagar, Seelanaickenpatti, Salem, India, 636201</p>
                                     </div>
                                 </div>
 
@@ -72,7 +72,7 @@ const Contact = () => {
                                     <Phone size={24} />
                                     <div>
                                         <h4>Call Us</h4>
-                                        <p><a href="tel:+919876543210">+91 98765 43210</a></p>
+                                        <p><a href="tel:+917200854999">+91 72008 54999</a></p>
                                     </div>
                                 </div>
 
@@ -88,7 +88,7 @@ const Contact = () => {
                                     <Clock size={24} />
                                     <div>
                                         <h4>Working Hours</h4>
-                                        <p>Mon - Sat: 10:00 AM - 8:00 PM<br />Sunday: Closed</p>
+                                        <p>Mon - Sat: 9:00 AM - 7:00 PM<br />Sunday: Closed</p>
                                     </div>
                                 </div>
                             </div>

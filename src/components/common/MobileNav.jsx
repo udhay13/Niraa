@@ -35,7 +35,7 @@ const MobileNav = () => {
 
     const handleWhatsApp = () => {
         const message = encodeURIComponent('Hello! I would like to book an appointment at Niraa Aesthetics.');
-        window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
+        window.open(`https://wa.me/917200854999?text=${message}`, '_blank');
     };
 
     const handleNavClick = (path) => {

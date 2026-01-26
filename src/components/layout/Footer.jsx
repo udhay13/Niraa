@@ -49,13 +49,13 @@ const Footer = () => {
                                 with cutting-edge technology and personalized care plans.
                             </p>
                             <div className="social-links">
-                                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                                <a href="https://www.instagram.com/paavaihospitalsalem?igsh=ejZrejgxbHpxZnM5" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                                     <Instagram size={22} />
                                 </a>
-                                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                                <a href="https://www.facebook.com/profile.php?id=61584310586952" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                                     <Facebook size={22} />
                                 </a>
-                                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                                <a href="https://www.youtube.com/@drpaavaisenthil" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
                                     <Youtube size={22} />
                                 </a>
                             </div>
@@ -97,11 +97,11 @@ const Footer = () => {
                             <div className="contact-info">
                                 <div className="contact-item">
                                     <MapPin size={18} />
-                                    <span>123 Premium Plaza, HSR Layout, Bangalore - 560102</span>
+                                    <span>T S, no 89, Auto Nagar, Indhira nagar, Seelanaickenpatti, Salem, India, 636201</span>
                                 </div>
                                 <div className="contact-item">
                                     <Phone size={18} />
-                                    <a href="tel:+919876543210">+91 98765 43210</a>
+                                    <a href="tel:+917200854999">+91 72008 54999</a>
                                 </div>
                                 <div className="contact-item">
                                     <Mail size={18} />
@@ -109,7 +109,7 @@ const Footer = () => {
                                 </div>
                                 <div className="contact-item">
                                     <Clock size={18} />
-                                    <span>Mon - Sat: 10AM - 8PM</span>
+                                    <span>Mon - Sat: 9AM - 7PM</span>
                                 </div>
                             </div>
                         </div>
