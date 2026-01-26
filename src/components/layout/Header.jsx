@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, Phone } from 'lucide-react';
 import './Header.css';
+// import logo from '../../assets/logo.png';
+const logo = 'https://i.ibb.co/LXzwBLgg/Niraa-1.png';
 
 const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -55,8 +57,7 @@ const Header = () => {
             <div className="header-container">
                 {/* Logo */}
                 <Link to="/" className="header-logo">
-                    <span className="logo-text">Niraa</span>
-                    <span className="logo-accent">Aesthetics</span>
+                    <img src={logo} alt="Niraa Aesthetics" className="logo-image" />
                 </Link>
 
                 {/* Desktop Navigation */}
@@ -126,8 +127,7 @@ const Header = () => {
             <div className={`mobile-sidebar ${isMobileMenuOpen ? 'mobile-sidebar-open' : ''}`}>
                 <div className="sidebar-header">
                     <Link to="/" className="header-logo" onClick={() => setIsMobileMenuOpen(false)}>
-                        <span className="logo-text">Niraa</span>
-                        <span className="logo-accent">Aesthetics</span>
+                        <img src={logo} alt="Niraa Aesthetics" className="logo-image" />
                     </Link>
                     <button
                         className="sidebar-close"

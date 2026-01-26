@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Sparkles, Phone } from 'lucide-react';
 import './Hero.css';
+// import heroBgNew from '../../assets/hero-bg-new.png';
 
 // Hero slider data - 4 templates
 const heroSlidesData = [
@@ -11,7 +12,7 @@ const heroSlidesData = [
         subtitle: 'Complete Skin Transformation',
         highlight: 'Premium Facial Package',
         description: 'Experience our signature facial treatments for radiant, youthful skin',
-        image: 'https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=1920&q=80',
+        image: 'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=1920&q=80', // Replaced local image potentially containing text
         treatments: ['HydraFacial', 'Chemical Peel', 'LED Therapy'],
         cta: 'Book Now',
         link: '/skin-treatments'
