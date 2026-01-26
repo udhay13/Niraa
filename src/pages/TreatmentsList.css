@@ -4,7 +4,7 @@
 
 /* Page Hero */
 .page-hero {
-    padding: var(--space-24) 0 var(--space-16);
+    padding: 140px 0 var(--space-16);
     background: linear-gradient(135deg, var(--color-text-primary) 0%, #3d3d3d 100%);
     color: var(--color-white);
 }

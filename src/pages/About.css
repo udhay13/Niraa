@@ -5,6 +5,7 @@
 .about-hero {
     background: linear-gradient(135deg, var(--color-text-primary) 0%, #3d3d3d 100%);
     position: relative;
+    padding: 140px 0 var(--space-16);
 }
 
 /* Story Section */

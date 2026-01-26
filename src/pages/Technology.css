@@ -4,6 +4,7 @@
 
 .tech-hero {
     background: linear-gradient(135deg, var(--color-text-primary) 0%, #3d3d3d 100%);
+    padding: 140px 0 var(--space-16);
 }
 
 .tech-hero::before {
